@@ -8,13 +8,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Avalonia.Markup.Xaml;
+
 namespace FFXIVAPP.Plugin.Parse.Controls {
     /// <summary>
     ///     Interaction logic for HealingOverTimeDataGrid.xaml
     /// </summary>
-    public partial class HealingOverTimeDataGrid {
+    public class HealingOverTimeDataGrid: DataGrid {
         public HealingOverTimeDataGrid() {
             this.InitializeComponent();
+        }
+        
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

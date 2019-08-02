@@ -11,9 +11,9 @@
 namespace FFXIVAPP.Plugin.Parse.Converters {
     using System;
     using System.Globalization;
-    using System.Windows.Data;
-    using System.Windows.Media;
-
+    using System.Linq;
+    using Avalonia.Data.Converters;
+    using Avalonia.Media;
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
     using FFXIVAPP.Plugin.Parse.Properties;
@@ -32,7 +32,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
                 Logging.Log(Logger, new LogItem(ex, true));
             }
 
-            SolidColorBrush brush = ColorStringToBrush(Settings.Default.DefaultProgressBarForeground);
+            ISolidColorBrush brush = ColorStringToBrush(Settings.Default.DefaultProgressBarForeground);
             switch (param) {
                 case "PLD":
                     brush = ColorStringToBrush(Settings.Default.PLDProgressBarForeground);
@@ -70,10 +70,16 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
             throw new NotImplementedException();
         }
 
-        private static SolidColorBrush ColorStringToBrush(string color) {
-            color = color.Replace("#", string.Empty);
+        private static ISolidColorBrush ColorStringToBrush(string color) {
+            Func<char, bool> isHex = c => (c >= '0' && c <= '9') ||
+                                          (c >= 'a' && c <= 'f') ||
+                                          (c >= 'A' && c <= 'F');
+            if (color?.Length == 8 && color[0] != '#' && color.All(isHex)) {
+                color = "#" + color;
+            }
+
             try {
-                return (SolidColorBrush) new BrushConverter().ConvertFrom(color);
+                return new SolidColorBrush(Color.Parse(color));
             }
             catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));

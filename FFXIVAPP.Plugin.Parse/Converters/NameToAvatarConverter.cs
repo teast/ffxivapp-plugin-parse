@@ -10,18 +10,19 @@
 
 namespace FFXIVAPP.Plugin.Parse.Converters {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Net;
     using System.Net.Cache;
     using System.Text.RegularExpressions;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Web;
-    using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Threading;
-
+    using Avalonia.Controls;
+    using Avalonia.Data.Converters;
     using FFXIVAPP.Common;
+    using FFXIVAPP.Common.Helpers;
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
     using FFXIVAPP.ResourceFiles;
@@ -67,7 +68,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
         /// <param name="parameter"> </param>
         /// <param name="culture"> </param>
         /// <returns> </returns>
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture) {
+        public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture) {
             if (values[1] == null) {
                 return null;
             }
@@ -108,19 +109,17 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
                                 var src = new Regex(@"<img src=string.Empty(?<image>.+)string.Empty width=string.Empty50string.Empty height=string.Empty50string.Empty alt=string.Emptystring.Empty>", RegexOptions.ExplicitCapture | RegexOptions.Multiline | RegexOptions.IgnoreCase);
                                 var imageUrl = src.Match(htmlSource).Groups["image"].Value;
                                 imageUrl = imageUrl.Substring(0, imageUrl.IndexOf("?", Constants.InvariantComparer)).Replace("50x50", "96x96");
-                                image.Dispatcher.Invoke(
-                                    DispatcherPriority.Background,
-                                    (ThreadStart) delegate {
-                                        var imageUri = this._cachingEnabled
-                                                           ? this.SaveToCache(fileName, new Uri(imageUrl))
-                                                           : imageUrl;
-                                        if (imageUri == null) {
-                                            image.Source = Theme.DefaultAvatar;
-                                        }
-                                        else {
-                                            image.Source = ImageUtilities.LoadImageFromStream(imageUri);
-                                        }
-                                    });
+                                DispatcherHelper.Invoke(() => {
+                                    var imageUri = this._cachingEnabled
+                                                        ? this.SaveToCache(fileName, new Uri(imageUrl))
+                                                        : imageUrl;
+                                    if (imageUri == null) {
+                                        image.Source = Theme.DefaultAvatar;
+                                    }
+                                    else {
+                                        image.Source = ImageUtilities.LoadImageFromStream(imageUri);
+                                    }
+                                });
                             }
                         }
                     }
@@ -132,7 +131,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
                 this.IsProcessing = false;
                 return true;
             };
-            downloadAvatar.BeginInvoke(delegate { }, downloadAvatar);
+            Task.Run(() => downloadAvatar());
             return Theme.DefaultAvatar;
         }
 

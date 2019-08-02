@@ -8,13 +8,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Avalonia.Markup.Xaml;
+
 namespace FFXIVAPP.Plugin.Parse.Controls {
     /// <summary>
     ///     Interaction logic for DamageTakenDataGrid.xaml
     /// </summary>
-    public partial class DamageTakenDataGrid {
+    public class DamageTakenDataGrid: DataGrid {
         public DamageTakenDataGrid() {
             this.InitializeComponent();
+        }
+        
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

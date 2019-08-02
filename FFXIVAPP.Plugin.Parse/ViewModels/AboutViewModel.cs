@@ -13,7 +13,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
-
+    using System.Runtime.InteropServices;
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.ViewModelBase;
 
@@ -36,7 +36,20 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
 
         public void OpenWebSite() {
             try {
-                Process.Start("https://github.com/FFXIVAPP/ffxivapp-plugin-parse");
+                var url = "https://github.com/FFXIVAPP/ffxivapp-plugin-parse";
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    url = url.Replace("&", "^&");
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    Process.Start("xdg-open", url);
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    Process.Start("open", url);
+                }
             }
             catch (Exception ex) {
                 var popupContent = new PopupContent();

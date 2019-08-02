@@ -8,13 +8,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Avalonia.Markup.Xaml;
+
 namespace FFXIVAPP.Plugin.Parse.Controls {
     /// <summary>
     ///     Interaction logic for HealingMitigatedDataGrid.xaml
     /// </summary>
-    public partial class HealingMitigatedDataGrid {
+    public class HealingMitigatedDataGrid: DataGrid {
         public HealingMitigatedDataGrid() {
             this.InitializeComponent();
+        }
+        
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

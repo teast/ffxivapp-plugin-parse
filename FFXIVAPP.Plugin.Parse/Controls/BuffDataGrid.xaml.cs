@@ -8,13 +8,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Avalonia.Markup.Xaml;
+
 namespace FFXIVAPP.Plugin.Parse.Controls {
     /// <summary>
     ///     Interaction logic for BuffDataGrid.xaml
     /// </summary>
-    public partial class BuffDataGrid {
+    public class BuffDataGrid: DataGrid {
         public BuffDataGrid() {
             this.InitializeComponent();
+        }
+        
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

@@ -30,11 +30,21 @@ namespace FFXIVAPP.Plugin.Parse.Windows {
 
         public ParseEntity ParseEntity {
             get {
-                return this._parseEntity ?? (this._parseEntity = new ParseEntity());
+                var t = this._parseEntity ?? (this._parseEntity = new ParseEntity());
+Console.WriteLine($"¤¤¤¤¤¤¤¤¤¤¤ ParseEntity.get (nil? {(t == null)}, nil2? {(t?.Players == null)})");
+                return t;
             }
 
             set {
                 this._parseEntity = value;
+                if (value?.Players != null)
+                {
+Console.WriteLine($"########### ParseEntity {value.Players.Count} player(s)");
+foreach(var p in value.Players) {
+    Console.WriteLine($"   name: \"{p.Name}\" DPS: \"{p.DPS}\" ");
+}
+                }
+
                 this.RaisePropertyChanged();
             }
         }

@@ -117,6 +117,7 @@ namespace FFXIVAPP.Plugin.Parse.Monitors {
         protected override void HandleEvent(Event e) {
             
 
+            Console.WriteLine("StatMonitor.HandleEvent now....");
             
 
             Utilities.Filter.Process(e);

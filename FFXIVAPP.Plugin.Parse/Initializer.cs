@@ -525,9 +525,5 @@ namespace FFXIVAPP.Plugin.Parse {
                 }
             }
         }
-
-        public static void SetupWidgetTopMost() {
-            WidgetTopMostHelper.HookWidgetTopMost();
-        }
     }
 }

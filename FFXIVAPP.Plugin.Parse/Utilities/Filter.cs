@@ -23,7 +23,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities {
 
         private static string You {
             get {
-                return string.IsNullOrWhiteSpace(Constants.CharacterName.Trim())
+                return string.IsNullOrWhiteSpace(Constants.CharacterName?.Trim())
                            ? "You"
                            : Constants.CharacterName;
             }

@@ -8,13 +8,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Avalonia.Markup.Xaml;
+
 namespace FFXIVAPP.Plugin.Parse.Controls {
     /// <summary>
     ///     Interaction logic for DamageOverTimeDataGrid.xaml
     /// </summary>
-    public partial class DamageOverTimeDataGrid {
+    public class DamageOverTimeDataGrid: DataGrid {
         public DamageOverTimeDataGrid() {
             this.InitializeComponent();
+        }
+        
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

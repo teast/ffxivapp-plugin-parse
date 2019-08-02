@@ -109,10 +109,12 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events {
             EventHandler<Event> eventHandler = @event.IsUnknown
                                                    ? this.OnUnknownLogEvent
                                                    : this.OnLogEvent;
+            Console.WriteLine("ParseAndPublish eventHandler...");
             if (eventHandler == null) {
                 return;
             }
 
+            Console.WriteLine("   LOCKING AND CALLING!!!! ParseAndPublish eventHandler...");
             lock (eventHandler) {
                 eventHandler(this, @event);
             }

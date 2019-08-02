@@ -1,23 +1,10 @@
 ﻿<UserControl x:Class="FFXIVAPP.Plugin.Parse.ShellView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Converters="clr-namespace:FFXIVAPP.Common.Converters;assembly=FFXIVAPP.Common"
-             xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:Resource="clr-namespace:FFXIVAPP.ResourceFiles;assembly=FFXIVAPP.ResourceFiles"
              xmlns:Parse="clr-namespace:FFXIVAPP.Plugin.Parse"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="clr-namespace:FFXIVAPP.Plugin.Parse.Views"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
-             mc:Ignorable="d">
-
-    <UserControl.Resources>
-        <Converters:VisibilityConverter x:Key="VisibilityConverter" />
-        <x:Static x:Key="ShellViewModel" Member="Parse:ShellViewModel.Instance" />
-        <x:Static x:Key="PluginViewModel" Member="Parse:PluginViewModel.Instance" />
-    </UserControl.Resources>
-
+             xmlns:views="clr-namespace:FFXIVAPP.Plugin.Parse.Views">
     <Grid x:Name="LayoutRoot" DataContext="{StaticResource ShellViewModel}">
         <TabControl x:Name="ShellViewTC" TabStripPlacement="Right">
             <TabItem x:Name="MainTI">
@@ -28,12 +15,11 @@
                                 BorderBrush="#FF000000"
                                 BorderThickness="1,1,1,1"
                                 CornerRadius="15">
-                            <iconPacks:PackIconFontAwesome Kind="Home"
-                                                           ToolTip="{Binding Locale[app_MainToolTip], Source={StaticResource PluginViewModel}}" />
+                            <Image Source="{x:Static Resource:Theme.HomeIcon20}" ToolTip.Tip="{Binding Locale[app_MainToolTip]}" />
                         </Border>
-                        <Label Padding="5"
-                               Content="{Binding Locale[app_MainToolTip], Source={StaticResource PluginViewModel}}"
-                               Visibility="{Binding EnableHelpLabels, Source={StaticResource PluginViewModel}, Converter={StaticResource VisibilityConverter}}" />
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"
+                               Text="{Binding Locale[app_MainToolTip]}"
+                               IsVisible="{Binding EnableHelpLabels}" />
                     </StackPanel>
                 </TabItem.Header>
                 <views:MainView x:Name="MainV" />
@@ -46,12 +32,11 @@
                                 BorderBrush="#FF000000"
                                 BorderThickness="1,1,1,1"
                                 CornerRadius="15">
-                            <iconPacks:PackIconFontAwesome Kind="Cog"
-                                                           ToolTip="{Binding Locale[app_SettingsToolTip], Source={StaticResource PluginViewModel}}" />
+                            <Image Source="{x:Static Resource:Theme.CogIcon20}" ToolTip.Tip="{Binding Locale[app_SettingsToolTip]}" />
                         </Border>
-                        <Label Padding="5"
-                               Content="{Binding Locale[app_SettingsToolTip], Source={StaticResource PluginViewModel}}"
-                               Visibility="{Binding EnableHelpLabels, Source={StaticResource PluginViewModel}, Converter={StaticResource VisibilityConverter}}" />
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"
+                               Text="{Binding Locale[app_SettingsToolTip]}"
+                               IsVisible="{Binding EnableHelpLabels}" />
                     </StackPanel>
                 </TabItem.Header>
                 <views:SettingsView x:Name="SettingsV" />
@@ -64,12 +49,11 @@
                                 BorderBrush="#FF000000"
                                 BorderThickness="1,1,1,1"
                                 CornerRadius="15">
-                            <iconPacks:PackIconFontAwesome Kind="Info"
-                                                           ToolTip="{Binding Locale[app_AboutToolTip], Source={StaticResource PluginViewModel}}" />
+                            <Image Source="{x:Static Resource:Theme.InfoIcon20}" ToolTip.Tip="{Binding Locale[app_AboutToolTip]}" />
                         </Border>
-                        <Label Padding="5"
-                               Content="{Binding Locale[app_AboutToolTip], Source={StaticResource PluginViewModel}}"
-                               Visibility="{Binding EnableHelpLabels, Source={StaticResource PluginViewModel}, Converter={StaticResource VisibilityConverter}}" />
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"
+                               Text="{Binding Locale[app_AboutToolTip]}"
+                               IsVisible="{Binding EnableHelpLabels}" />
                     </StackPanel>
                 </TabItem.Header>
                 <views:AboutView x:Name="AboutV" />

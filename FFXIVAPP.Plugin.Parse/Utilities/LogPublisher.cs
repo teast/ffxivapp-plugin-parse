@@ -50,6 +50,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities {
         public static void HandleCommands(ChatLogItem chatLogItem) {
             // process commands
             if (chatLogItem.Code == "0038") {
+            Console.WriteLine("WOOOOOOW! got chatlog 0038...");
                 Match commandsRegEx = CommandBuilder.CommandsRegEx.Match(chatLogItem.Line.Trim());
                 if (!commandsRegEx.Success) {
                     return;
@@ -60,9 +61,11 @@ namespace FFXIVAPP.Plugin.Parse.Utilities {
                                   : string.Empty;
                 switch (command) {
                     case "on":
+                    Console.WriteLine("Lets go, time to parse!");
                         IsPaused = false;
                         break;
                     case "off":
+                    Console.WriteLine("OK! time to stop parsing!");
                         IsPaused = true;
                         break;
                     case "reset":

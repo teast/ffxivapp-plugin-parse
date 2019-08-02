@@ -12,8 +12,8 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
     using System;
     using System.Globalization;
     using System.Windows;
-    using System.Windows.Data;
 
+    using Avalonia.Data.Converters;
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
     using FFXIVAPP.Plugin.Parse.Properties;
@@ -35,13 +35,9 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
                         displayProperty = Settings.Default.DPSWidgetDisplayProperty;
                         switch (displayProperty) {
                             case "Individual":
-                                return tag.Contains("Combined")
-                                           ? Visibility.Collapsed
-                                           : Visibility.Visible;
+                                return !tag.Contains("Combined");
                             case "Combined":
-                                return tag.Contains("Combined")
-                                           ? Visibility.Visible
-                                           : Visibility.Collapsed;
+                                return tag.Contains("Combined");
                         }
 
                         break;
@@ -52,13 +48,9 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
                         displayProperty = Settings.Default.HPSWidgetDisplayProperty;
                         switch (displayProperty) {
                             case "Individual":
-                                return tag.Contains("Combined")
-                                           ? Visibility.Collapsed
-                                           : Visibility.Visible;
+                                return !tag.Contains("Combined");
                             case "Combined":
-                                return tag.Contains("Combined")
-                                           ? Visibility.Visible
-                                           : Visibility.Collapsed;
+                                return tag.Contains("Combined");
                         }
 
                         break;
@@ -69,13 +61,9 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
                         displayProperty = Settings.Default.DTPSWidgetDisplayProperty;
                         switch (displayProperty) {
                             case "Individual":
-                                return tag.Contains("Combined")
-                                           ? Visibility.Collapsed
-                                           : Visibility.Visible;
+                                return !tag.Contains("Combined");
                             case "Combined":
-                                return tag.Contains("Combined")
-                                           ? Visibility.Visible
-                                           : Visibility.Collapsed;
+                                return tag.Contains("Combined");
                         }
 
                         break;
@@ -85,7 +73,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
                 Logging.Log(Logger, new LogItem(ex, true));
             }
 
-            return Visibility.Collapsed;
+            return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {

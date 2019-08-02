@@ -21,7 +21,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
     using System.Text.RegularExpressions;
     using System.Windows;
     using System.Windows.Input;
-
+    using Avalonia.Controls;
     using FFXIVAPP.Common;
     using FFXIVAPP.Common.Helpers;
     using FFXIVAPP.Common.Models;
@@ -126,6 +126,27 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
         }
 
+        private ParseHistoryItem _selectedViewSource;
+        private DropDownItem _selectedViewType;
+        public ParseHistoryItem SelectedViewSource {
+            get => _selectedViewSource ?? (_selectedViewSource = ParseHistory.FirstOrDefault());
+            set {
+                _selectedViewSource = value;
+                this.RaisePropertyChanged();
+                this.SwitchInfoViewSource();
+            }
+        }
+
+        public DropDownItem SelectedViewType {
+            // TODO: How to get AvaloniaUI's dropdown to select the first item in the list???
+            get => _selectedViewType;
+            set {
+                _selectedViewType = value;
+                this.RaisePropertyChanged();
+                this.SwitchInfoViewType();
+            }
+        }
+
         public ObservableCollection<ParseHistoryItem> ParseHistory {
             get {
                 return this._parseHistory ?? (this._parseHistory = new ObservableCollection<ParseHistoryItem> {
@@ -181,26 +202,28 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             // DispatcherHelper.Invoke(() => Clipboard.SetText(results));
         }
 
-        private void ProcessSample() {
+        private async void ProcessSample() {
             var openFileDialog = new OpenFileDialog {
                 InitialDirectory = Path.Combine(Common.Constants.LogsPath, "Parser"),
-                Multiselect = false,
-                Filter = "JSON Files (*.json)|*.json"
+                AllowMultiple = false,
+
+                Filters = new List<FileDialogFilter> { new FileDialogFilter { Name = "JSON Files (*.json)", Extensions = new List<string> { "json"}}}
             };
-            openFileDialog.FileOk += delegate {
-                try {
-                    var parse = File.ReadAllText(openFileDialog.FileName, Encoding.UTF8);
-                    JsonHelper.ToParseControl.ConvertJson(openFileDialog.FileName, parse);
+            var result = await openFileDialog.ShowAsync();
+            try {
+                // TOOD: Check what kind of result we got from OpenFileDialog
+                if (result?.Length >= 1) {
+                    var parse = File.ReadAllText(result[0], Encoding.UTF8);
+                    JsonHelper.ToParseControl.ConvertJson(result[0], parse);
                 }
-                catch (Exception ex) {
-                    var popupContent = new PopupContent {
-                        Title = PluginViewModel.Instance.Locale["app_WarningMessage"],
-                        Message = ex.Message
-                    };
-                    Plugin.PHost.PopupMessage(Plugin.PName, popupContent);
-                }
-            };
-            openFileDialog.ShowDialog();
+            }
+            catch (Exception ex) {
+                var popupContent = new PopupContent {
+                    Title = PluginViewModel.Instance.Locale["app_WarningMessage"],
+                    Message = ex.Message
+                };
+                Plugin.PHost.PopupMessage(Plugin.PName, popupContent);
+            }
         }
 
         private void RaisePropertyChanged([CallerMemberName] string caller = "") {
@@ -211,18 +234,22 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             DispatcherHelper.Invoke(
                 delegate {
                     try {
+                        /* TODO: Direct view access, PlayerInfoListView.SelectedIndex
                         var index = MainView.View.PlayerInfoListView.SelectedIndex;
                         MainView.View.PlayerInfoListView.SelectedIndex = -1;
                         MainView.View.PlayerInfoListView.SelectedIndex = index;
+                        */
                     }
                     catch (Exception ex) {
                         Logging.Log(Logger, new LogItem(ex, true));
                     }
 
                     try {
+                        /* TODO: Direct view access, MonsterInfoListView.SelectedIndex
                         var index = MainView.View.MonsterInfoListView.SelectedIndex;
                         MainView.View.MonsterInfoListView.SelectedIndex = -1;
                         MainView.View.MonsterInfoListView.SelectedIndex = index;
+                        */
                     }
                     catch (Exception ex) {
                         Logging.Log(Logger, new LogItem(ex, true));
@@ -254,7 +281,9 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
 
             if (this.IsHistory) {
+                /* TODO: Direct view access, SelectedMonsterName.Text
                 monster = ((List<HistoryGroup>) monsters).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedMonsterName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).Cast<HistoryGroup>().FirstOrDefault();
+                */
                 if (monster == null) {
                     return;
                 }
@@ -263,7 +292,9 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
 
             if (this.IsCurrent) {
+                /* TODO: Direct view access, SelectedMonsterName.Text
                 monster = ((List<StatGroup>) monsters).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedMonsterName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).Cast<Monster>().FirstOrDefault();
+                */
                 if (monster == null) {
                     return;
                 }
@@ -320,6 +351,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                 return;
             }
 
+            /* TODO: MetroWindowDataGrid
             var x = new xMetroWindowDataGrid {
                 Title = title,
                 xMetroWindowDG = {
@@ -327,6 +359,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                 }
             };
             x.Show();
+             */
         }
 
         private void ShowLast20PlayerActions(string actionType) {
@@ -343,7 +376,9 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
 
             if (this.IsHistory) {
+                /* TODO: Direct view access, SelectedPlayerName.Text
                 player = ((List<HistoryGroup>) players).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedPlayerName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).Cast<HistoryGroup>().FirstOrDefault();
+                 */
                 if (player == null) {
                     return;
                 }
@@ -352,7 +387,9 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
 
             if (this.IsCurrent) {
+                /* TODO: Direct view access, SelectedPlayerName.Text
                 player = ((List<StatGroup>) players).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedPlayerName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).Cast<Player>().FirstOrDefault();
+                */
                 if (player == null) {
                     return;
                 }
@@ -409,6 +446,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                 return;
             }
 
+            /* TODO: MetroWindowDataGrid
             var x = new xMetroWindowDataGrid {
                 Title = title,
                 xMetroWindowDG = {
@@ -416,6 +454,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                 }
             };
             x.Show();
+            */
         }
 
         private void ShowLast20PlayerItemsUsed() {
@@ -432,7 +471,9 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
 
             if (this.IsHistory) {
+                /* TODO: Direct view access, SelectedPlayerName.Text
                 player = ((List<HistoryGroup>) players).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedPlayerName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).Cast<HistoryGroup>().FirstOrDefault();
+                */
                 if (player == null) {
                     return;
                 }
@@ -441,7 +482,9 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
 
             if (this.IsCurrent) {
+                /* TODO: Direct view access, SelectedPlayerName.Text
                 player = ((List<StatGroup>) players).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedPlayerName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).Cast<Player>().FirstOrDefault();
+                */
                 if (player == null) {
                     return;
                 }
@@ -461,6 +504,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                 return;
             }
 
+            /* TODO: DataGrid
             var x = new xMetroWindowDataGrid {
                 Title = title,
                 xMetroWindowDG = {
@@ -468,26 +512,24 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                 }
             };
             x.Show();
+            */
         }
 
         private void SwitchInfoViewSource() {
             try {
-                var index = MainView.View?.InfoViewSource.SelectedIndex ?? 0;
-                switch (index) {
-                    case 0:
+                if (this.SelectedViewSource == null || this.SelectedViewSource.Name == "Current") {
                         this.PlayerInfoSource = null;
                         this.MonsterInfoSource = null;
                         this.OverallInfoSource = null;
                         this.IsCurrent = true;
                         this.IsHistory = false;
-                        break;
-                    default:
-                        this.PlayerInfoSource = this.ParseHistory[index].HistoryControl.Timeline.Party;
-                        this.MonsterInfoSource = this.ParseHistory[index].HistoryControl.Timeline.Monster;
-                        this.OverallInfoSource = this.ParseHistory[index].HistoryControl.Timeline.Overall;
+                }
+                else {
+                        this.PlayerInfoSource = this.SelectedViewSource.HistoryControl.Timeline.Party;
+                        this.MonsterInfoSource = this.SelectedViewSource.HistoryControl.Timeline.Monster;
+                        this.OverallInfoSource = this.SelectedViewSource.HistoryControl.Timeline.Overall;
                         this.IsCurrent = false;
                         this.IsHistory = true;
-                        break;
                 }
             }
             catch (Exception ex) {
@@ -495,38 +537,94 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
         }
 
+        private bool _showPlayerInfoListView;
+        private bool _showMonsterInfoListView;
+        private bool _showRefreshSelectedButton;
+        public bool ShowPlayerInfoListView
+        {
+            get => _showPlayerInfoListView;
+            set {
+                _showPlayerInfoListView = value;
+                this.RaisePropertyChanged();
+            }
+        }
+        public bool ShowMonsterInfoListView 
+        {
+            get => _showMonsterInfoListView;
+            set {
+                _showMonsterInfoListView = value;
+                this.RaisePropertyChanged();
+            }
+        }
+        public bool ShowRefreshSelectedButton 
+        {
+            get => _showRefreshSelectedButton;
+            set {
+                _showRefreshSelectedButton = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
         private void SwitchInfoViewType() {
             try {
+                /* TODO: Direct view access, InfoViewType
                 var index = MainView.View.InfoViewType.SelectedIndex;
-                switch (MainView.View.InfoViewType.SelectedIndex) {
-                    case 0:
+                */
+                var index = this.SelectedViewType?.Tag?.ToString() ?? "0";
+                switch (index) {
+                    case "0":
+                        ShowPlayerInfoListView = false;
+                        ShowMonsterInfoListView = false;
+                        ShowRefreshSelectedButton = false;
+                        /* TODO: Direct view access, Visiblity
                         MainView.View.PlayerInfoListView.Visibility = Visibility.Collapsed;
                         MainView.View.MonsterInfoListView.Visibility = Visibility.Collapsed;
                         MainView.View.RefreshSelectedButton.Visibility = Visibility.Collapsed;
+                        */
                         break;
-                    case 1:
+                    case "1":
+                        ShowPlayerInfoListView = true;
+                        ShowMonsterInfoListView = false;
+                        ShowRefreshSelectedButton = true;
+                        /* TODO: Direct view access, Visiblity
                         MainView.View.PlayerInfoListView.Visibility = Visibility.Visible;
                         MainView.View.MonsterInfoListView.Visibility = Visibility.Collapsed;
                         MainView.View.RefreshSelectedButton.Visibility = Visibility.Visible;
+                        */
                         break;
-                    case 2:
+                    case "2":
+                        ShowPlayerInfoListView = false;
+                        ShowMonsterInfoListView = false;
+                        ShowRefreshSelectedButton = false;
+                        /* TODO: Direct view access, Visiblity
                         MainView.View.PlayerInfoListView.Visibility = Visibility.Collapsed;
                         MainView.View.MonsterInfoListView.Visibility = Visibility.Collapsed;
                         MainView.View.RefreshSelectedButton.Visibility = Visibility.Collapsed;
+                        */
                         break;
-                    case 3:
+                    case "3":
+                        ShowPlayerInfoListView = false;
+                        ShowMonsterInfoListView = true;
+                        ShowRefreshSelectedButton = true;
+                        /* TODO: Direct view access, Visiblity
                         MainView.View.PlayerInfoListView.Visibility = Visibility.Collapsed;
                         MainView.View.MonsterInfoListView.Visibility = Visibility.Visible;
                         MainView.View.RefreshSelectedButton.Visibility = Visibility.Visible;
+                        */
                         break;
-                    case 4:
+                    case "4":
+                        ShowPlayerInfoListView = false;
+                        ShowMonsterInfoListView = false;
+                        ShowRefreshSelectedButton = false;
+                        /* TODO: Direct view access, Visiblity
                         MainView.View.PlayerInfoListView.Visibility = Visibility.Collapsed;
                         MainView.View.MonsterInfoListView.Visibility = Visibility.Collapsed;
                         MainView.View.RefreshSelectedButton.Visibility = Visibility.Collapsed;
+                        */
                         break;
                 }
 
-                MainView.View.InfoViewResults.SelectedIndex = index;
+                MainView.View.InfoViewResults.SelectedIndex = Convert.ToInt32(index);
             }
             catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));

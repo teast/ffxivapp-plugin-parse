@@ -60,6 +60,10 @@ namespace FFXIVAPP.Plugin.Parse.Models.History {
             return stat;
         }
 
+        public HistoryStat<double> this[string name] {
+            get => this.GetStat(name);
+        }
+
         public IEnumerator<HistoryStat<double>> GetEnumerator() {
             return this._statDict.Values.GetEnumerator();
         }

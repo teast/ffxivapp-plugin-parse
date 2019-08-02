@@ -17,8 +17,10 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats {
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Windows.Threading;
+    using Avalonia.Threading;
+    using PropertyChanged;
 
+    [DoNotNotify]
     public class StatGroup : StatGroupTypeDescriptor, ICollection<StatGroup>, INotifyCollectionChanged, INotifyPropertyChanged {
         public StatContainer Stats = new StatContainer();
 
@@ -225,6 +227,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats {
         }
 
         private void DoCollectionChanged(NotifyCollectionChangedAction action, StatGroup statGroup) {
+            /* TODO: Dispatcher & DispatcherObject
             Dispatcher dispatcher = null;
             foreach (Delegate @delegate in this.CollectionChanged.GetInvocationList()) {
                 var dispatcherObject = @delegate.Target as DispatcherObject;
@@ -242,6 +245,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats {
             else {
                 this.CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, statGroup));
             }
+            */
         }
 
         /// <summary>

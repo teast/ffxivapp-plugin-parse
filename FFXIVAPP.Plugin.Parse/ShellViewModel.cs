@@ -28,7 +28,6 @@ namespace FFXIVAPP.Plugin.Parse {
             Initializer.LoadPlayerRegEx();
             Initializer.LoadMonsterRegEx();
             Initializer.EnsureLogsDirectory();
-            Initializer.SetupWidgetTopMost();
             Settings.Default.PropertyChanged += DefaultOnPropertyChanged;
         }
 
@@ -40,9 +39,11 @@ namespace FFXIVAPP.Plugin.Parse {
             }
         }
 
+        /* TODO: Loaded event, Not needed in this plugin?
         internal static void Loaded(object sender, RoutedEventArgs e) {
             ShellView.View.Loaded -= Loaded;
         }
+        */
 
         private static void DefaultOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
             switch (propertyChangedEventArgs.PropertyName) {
@@ -63,9 +64,11 @@ namespace FFXIVAPP.Plugin.Parse {
                     ParseControl.Instance.StatMonitor.ToggleFilter(EventParser.PetOther);
                     break;
                 case "WidgetClickThroughEnabled":
+                    /* TODO: WinAPI ClickThrough
                     WinAPI.ToggleClickThrough(Widgets.Instance.DPSWidget);
                     WinAPI.ToggleClickThrough(Widgets.Instance.DTPSWidget);
                     WinAPI.ToggleClickThrough(Widgets.Instance.HPSWidget);
+                     */
                     break;
                 case "DPSWidgetUIScale":
                     try {
@@ -102,6 +105,7 @@ namespace FFXIVAPP.Plugin.Parse {
                     break;
                 case "DPSWidgetSortDirection":
                 case "DPSWidgetSortProperty":
+                    /* TODO: SortDescription + Views access
                     try {
                         ListSortDirection direction = Settings.Default.DPSWidgetSortDirection == "Descending"
                                                           ? ListSortDirection.Descending
@@ -116,9 +120,11 @@ namespace FFXIVAPP.Plugin.Parse {
                     }
 
                     DPSWidget.View.Party.Items.Refresh();
+                    */
                     break;
                 case "HPSWidgetSortDirection":
                 case "HPSWidgetSortProperty":
+                    /* TODO: SortDescription + Views access
                     try {
                         ListSortDirection direction = Settings.Default.HPSWidgetSortDirection == "Descending"
                                                           ? ListSortDirection.Descending
@@ -133,9 +139,11 @@ namespace FFXIVAPP.Plugin.Parse {
                     }
 
                     HPSWidget.View.Party.Items.Refresh();
+                    */
                     break;
                 case "DTPSWidgetSortDirection":
                 case "DTPSWidgetSortProperty":
+                    /* TODO: SortDescription + Views access
                     try {
                         ListSortDirection direction = Settings.Default.DTPSWidgetSortDirection == "Descending"
                                                           ? ListSortDirection.Descending
@@ -150,6 +158,7 @@ namespace FFXIVAPP.Plugin.Parse {
                     }
 
                     DTPSWidget.View.Party.Items.Refresh();
+                    */
                     break;
             }
         }

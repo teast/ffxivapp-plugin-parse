@@ -12,11 +12,10 @@ namespace FFXIVAPP.Plugin.Parse {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ComponentModel.Composition;
+    using System.Composition;
     using System.Runtime.CompilerServices;
     using System.Windows;
-    using System.Windows.Controls;
-
+    using Avalonia.Controls;
     using FFXIVAPP.Common.Events;
     using FFXIVAPP.Common.Helpers;
     using FFXIVAPP.Common.Models;
@@ -37,7 +36,7 @@ namespace FFXIVAPP.Plugin.Parse {
 
         private string _name;
 
-        private MessageBoxResult _popupResult;
+        private bool _popupResult;
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
@@ -102,7 +101,7 @@ namespace FFXIVAPP.Plugin.Parse {
 
         public string Notice { get; private set; }
 
-        public MessageBoxResult PopupResult {
+        public bool PopupResult {
             get {
                 return this._popupResult;
             }
@@ -120,7 +119,7 @@ namespace FFXIVAPP.Plugin.Parse {
         public TabItem CreateTab() {
             this.Locale = LocaleHelper.Update(Constants.CultureInfo);
             var content = new ShellView();
-            content.Loaded += ShellViewModel.Loaded;
+            // TODO: Loaded event not needed?, content.Loaded += ShellViewModel.Loaded;
             var tabItem = new TabItem {
                 Header = this.Name,
                 Content = content
@@ -134,6 +133,7 @@ namespace FFXIVAPP.Plugin.Parse {
         }
 
         public void Dispose(bool isUpdating = false) {
+            Console.WriteLine("Plugin.Parse> Time to die");
             EventSubscriber.UnSubscribe();
 
             /*
@@ -143,7 +143,7 @@ namespace FFXIVAPP.Plugin.Parse {
                          * 
                          * Suggested use is to not save settings if updating. Other disposing events could happen based on your needs.
                          */
-            Settings.Default.Save();
+            Settings.Save();
         }
 
         public void Initialize(IPluginHost pluginHost) {

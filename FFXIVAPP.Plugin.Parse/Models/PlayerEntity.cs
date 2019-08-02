@@ -65,7 +65,8 @@ namespace FFXIVAPP.Plugin.Parse.Models {
         public string LastName {
             get {
                 try {
-                    return this.Name.Split(' ')[1];
+                    var name = this.Name.Split(' ');
+                    return name.Length > 1 ? name[1] : string.Empty;
                 }
                 catch (Exception) {
                     return string.Empty;

@@ -9,15 +9,15 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace FFXIVAPP.Plugin.Parse.Localization {
-    using System.Windows;
+    using System.Collections.Generic;
 
     public abstract class German {
-        private static readonly ResourceDictionary Dictionary = new ResourceDictionary();
+        private static readonly Dictionary<string, string> Dictionary = new Dictionary<string, string>();
 
         /// <summary>
         /// </summary>
         /// <returns> </returns>
-        public static ResourceDictionary Context() {
+        public static Dictionary<string, string> Context() {
             Dictionary.Clear();
             Dictionary.Add("parse_", "*PH*");
             Dictionary.Add("parse_TotalOverallDamageHeader", "Total");

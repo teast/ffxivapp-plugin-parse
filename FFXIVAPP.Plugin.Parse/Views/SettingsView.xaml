@@ -1,422 +1,431 @@
 ﻿<UserControl x:Class="FFXIVAPP.Plugin.Parse.Views.SettingsView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Converters="clr-namespace:FFXIVAPP.Common.Converters;assembly=FFXIVAPP.Common"
-             xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:PluginProperties="clr-namespace:FFXIVAPP.Plugin.Parse.Properties"
              xmlns:ViewModels="clr-namespace:FFXIVAPP.Plugin.Parse.ViewModels"
-             xmlns:controls="clr-namespace:FFXIVAPP.Plugin.Parse.Controls"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:parse="clr-namespace:FFXIVAPP.Plugin.Parse"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
-             mc:Ignorable="d">
+             xmlns:teast="clr-namespace:Teast.Controls;assembly=Teast.Controls.GroupBox"
+             xmlns:parse="clr-namespace:FFXIVAPP.Plugin.Parse">
 
+<!--
     <UserControl.Resources>
         <x:Static x:Key="SettingsViewModel" Member="ViewModels:SettingsViewModel.Instance" />
         <x:Static x:Key="PluginViewModel" Member="parse:PluginViewModel.Instance" />
         <x:Static x:Key="Settings" Member="PluginProperties:Settings.Default" />
         <Converters:VisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
-
-    <Grid x:Name="LayoutRoot" DataContext="{StaticResource SettingsViewModel}">
+-->
+    <Grid x:Name="LayoutRoot">
         <TabControl x:Name="SettingsViewTC">
-            <TabItem Header="{Binding Locale[app_MainSettingsTabHeader], Source={StaticResource PluginViewModel}}">
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="{Binding Locale[app_MainSettingsTabHeader], Source={x:Static parse:PluginViewModel.Instance}}" />
+                </TabItem.Header>
                 <ScrollViewer>
                     <StackPanel>
-                        <GroupBox
-                            Header="{Binding Locale[parse_EnableClickThroughHeader], Source={StaticResource PluginViewModel}}">
+                        <!-- TODO: ClickThrough not supported
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_EnableClickThroughHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch
-                                    IsChecked="{Binding WidgetClickThroughEnabled, Source={StaticResource Settings}}" />
+                                <CheckBox IsChecked="{Binding WidgetClickThroughEnabled, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_ShowTitlesOnWidgetsHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        -->
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_ShowTitlesOnWidgetsHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch
-                                    IsChecked="{Binding ShowTitlesOnWidgets, Source={StaticResource Settings}}" />
+                                <CheckBox
+                                    IsChecked="{Binding ShowTitlesOnWidgets, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_WidgetOpacityHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        <!-- TODO: Avalonia dont support opacity windows
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_WidgetOpacityHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <ComboBox Margin="5"
-                                          IsReadOnly="False"
-                                          ItemsSource="{Binding WidgetOpacityList, Source={StaticResource Settings}}"
-                                          SelectedValue="{Binding WidgetOpacity, Source={StaticResource Settings}}" />
+                                <DropDown Margin="5"
+                                          Items="{Binding WidgetOpacityList, Source={x:Static PluginProperties:Settings.Default}}"
+                                          SelectedItem="{Binding WidgetOpacity, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_DPSWidgetHeader], Source={StaticResource PluginViewModel}}">
-                            <StackPanel>
-                                <DockPanel LastChildFill="True">
-                                    <Button Margin="3"
-                                            Command="{Binding ResetDPSWidgetCommand, Source={StaticResource SettingsViewModel}}"
-                                            Content="{Binding Locale[parse_ResetPositionButtonText], Source={StaticResource PluginViewModel}}"
-                                            DockPanel.Dock="Right" />
-                                    <Button Margin="3"
-                                            Command="{Binding OpenDPSWidgetCommand, Source={StaticResource SettingsViewModel}}"
-                                            Content="{Binding Locale[parse_OpenNowButtonText], Source={StaticResource PluginViewModel}}" />
-                                </DockPanel>
-                            </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_DTPSWidgetHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        -->
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_DPSWidgetHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
                                 <DockPanel LastChildFill="True">
                                     <Button Margin="3"
-                                            Command="{Binding ResetDTPSWidgetCommand, Source={StaticResource SettingsViewModel}}"
-                                            Content="{Binding Locale[parse_ResetPositionButtonText], Source={StaticResource PluginViewModel}}"
+                                            Command="{Binding ResetDPSWidgetCommand, Source={x:Static ViewModels:SettingsViewModel.Instance}}"
+                                            Content="{Binding Locale[parse_ResetPositionButtonText], Source={x:Static parse:PluginViewModel.Instance}}"
                                             DockPanel.Dock="Right" />
                                     <Button Margin="3"
-                                            Command="{Binding OpenDTPSWidgetCommand, Source={StaticResource SettingsViewModel}}"
-                                            Content="{Binding Locale[parse_OpenNowButtonText], Source={StaticResource PluginViewModel}}" />
+                                            Command="{Binding OpenDPSWidgetCommand, Source={x:Static ViewModels:SettingsViewModel.Instance}}"
+                                            Content="{Binding Locale[parse_OpenNowButtonText], Source={x:Static parse:PluginViewModel.Instance}}" />
                                 </DockPanel>
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_HPSWidgetHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_DTPSWidgetHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
                                 <DockPanel LastChildFill="True">
                                     <Button Margin="3"
-                                            Command="{Binding ResetHPSWidgetCommand, Source={StaticResource SettingsViewModel}}"
-                                            Content="{Binding Locale[parse_ResetPositionButtonText], Source={StaticResource PluginViewModel}}"
+                                            Command="{Binding ResetDTPSWidgetCommand, Source={x:Static ViewModels:SettingsViewModel.Instance}}"
+                                            Content="{Binding Locale[parse_ResetPositionButtonText], Source={x:Static parse:PluginViewModel.Instance}}"
                                             DockPanel.Dock="Right" />
                                     <Button Margin="3"
-                                            Command="{Binding OpenHPSWidgetCommand, Source={StaticResource SettingsViewModel}}"
-                                            Content="{Binding Locale[parse_OpenNowButtonText], Source={StaticResource PluginViewModel}}" />
+                                            Command="{Binding OpenDTPSWidgetCommand, Source={x:Static ViewModels:SettingsViewModel.Instance}}"
+                                            Content="{Binding Locale[parse_OpenNowButtonText], Source={x:Static parse:PluginViewModel.Instance}}" />
                                 </DockPanel>
                             </StackPanel>
-                        </GroupBox>
+                        </teast:GroupBox>
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_HPSWidgetHeader], Source={x:Static parse:PluginViewModel.Instance}}">
+                            <StackPanel>
+                                <DockPanel LastChildFill="True">
+                                    <Button Margin="3"
+                                            Command="{Binding ResetHPSWidgetCommand, Source={x:Static ViewModels:SettingsViewModel.Instance}}"
+                                            Content="{Binding Locale[parse_ResetPositionButtonText], Source={x:Static parse:PluginViewModel.Instance}}"
+                                            DockPanel.Dock="Right" />
+                                    <Button Margin="3"
+                                            Command="{Binding OpenHPSWidgetCommand, Source={x:Static ViewModels:SettingsViewModel.Instance}}"
+                                            Content="{Binding Locale[parse_OpenNowButtonText], Source={x:Static parse:PluginViewModel.Instance}}" />
+                                </DockPanel>
+                            </StackPanel>
+                        </teast:GroupBox>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="{Binding Locale[parse_ParseableTabHeader], Source={StaticResource PluginViewModel}}">
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="{Binding Locale[parse_ParseableTabHeader], Source={x:Static parse:PluginViewModel.Instance}}" />
+                </TabItem.Header>
                 <ScrollViewer>
                     <StackPanel>
                         <TextBlock
-                            Text="{Binding Locale[AboutParsingPetsLabel], Source={StaticResource PluginViewModel}}" />
-                        <GroupBox Header="{Binding Locale[parse_YouHeader], Source={StaticResource PluginViewModel}}">
+                            Text="{Binding Locale[AboutParsingPetsLabel], Source={x:Static parse:PluginViewModel.Instance}}" />
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_YouHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch
-                                    IsChecked="{Binding ParseYou, Source={StaticResource Settings}}" />
+                                <CheckBox
+                                    IsChecked="{Binding ParseYou, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox Header="{Binding Locale[parse_PartyHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_PartyHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch
-                                    IsChecked="{Binding ParseParty, Source={StaticResource Settings}}" />
+                                <CheckBox
+                                    IsChecked="{Binding ParseParty, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_AllianceHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        <teast:GroupBox
+                            HeaderBackground="{DynamicResource ThemeAccentBrush}"
+                            HeaderForeground="{DynamicResource ThemeBackgroundBrush}"
+                            HeaderMargin="4"
+                            HeaderUpperCase="True"
+                            BorderBrush="{DynamicResource ThemeAccentBrush}"
+                            BorderThickness="{DynamicResource ThemeBorderThickness}"
+                            Header="{Binding Locale[parse_AllianceHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch
-                                    IsChecked="{Binding ParseAlliance, Source={StaticResource Settings}}" />
+                                <CheckBox
+                                    IsChecked="{Binding ParseAlliance, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox Header="{Binding Locale[parse_OtherHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_OtherHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch
-                                    IsChecked="{Binding ParseOther, Source={StaticResource Settings}}" />
+                                <CheckBox
+                                    IsChecked="{Binding ParseOther, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
+                        </teast:GroupBox>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="{Binding Locale[parse_ColorsTabHeader], Source={StaticResource PluginViewModel}}">
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="{Binding Locale[parse_ColorsTabHeader], Source={x:Static parse:PluginViewModel.Instance}}" />
+                </TabItem.Header>
                 <ScrollViewer>
                     <StackPanel>
                         <TextBlock
-                            Text="{Binding Locale[parse_AboutParsingPetsLabel], Source={StaticResource PluginViewModel}}"
-                            TextWrapping="WrapWithOverflow" />
-                        <GroupBox
-                            Header="{Binding Locale[parse_AboutColorsParsingLabel], Source={StaticResource PluginViewModel}}">
-                            <TextBox Text="{Binding DefaultProgressBarForeground, Source={StaticResource Settings}}" />
-                        </GroupBox>
+                            Text="{Binding Locale[parse_AboutParsingPetsLabel], Source={x:Static parse:PluginViewModel.Instance}}"
+                            TextWrapping="Wrap" />
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_AboutColorsParsingLabel], Source={x:Static parse:PluginViewModel.Instance}}">
+                            <TextBox Text="{Binding DefaultProgressBarForeground, Source={x:Static PluginProperties:Settings.Default}}" />
+                        </teast:GroupBox>
                         <Expander Margin="5,0"
                                   Padding="0"
-                                  Header="{Binding Locale[parse_ColorsJobsLabel], Source={StaticResource PluginViewModel}}">
+                                  Header="{Binding Locale[parse_ColorsJobsLabel], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <GroupBox Header="PLD">
+                                <teast:GroupBox Header="PLD">
                                     <TextBox
-                                        Text="{Binding PLDProgressBarForeground, Source={StaticResource Settings}}" />
-                                </GroupBox>
-                                <GroupBox Header="DRG">
+                                        Text="{Binding PLDProgressBarForeground, Source={x:Static PluginProperties:Settings.Default}}" />
+                                </teast:GroupBox>
+                                <teast:GroupBox Header="DRG">
                                     <TextBox
-                                        Text="{Binding DRGProgressBarForeground, Source={StaticResource Settings}}" />
-                                </GroupBox>
-                                <GroupBox Header="BLM">
+                                        Text="{Binding DRGProgressBarForeground, Source={x:Static PluginProperties:Settings.Default}}" />
+                                </teast:GroupBox>
+                                <teast:GroupBox Header="BLM">
                                     <TextBox
-                                        Text="{Binding BLMProgressBarForeground, Source={StaticResource Settings}}" />
-                                </GroupBox>
-                                <GroupBox Header="WAR">
+                                        Text="{Binding BLMProgressBarForeground, Source={x:Static PluginProperties:Settings.Default}}" />
+                                </teast:GroupBox>
+                                <teast:GroupBox Header="WAR">
                                     <TextBox
-                                        Text="{Binding WARProgressBarForeground, Source={StaticResource Settings}}" />
-                                </GroupBox>
-                                <GroupBox Header="WHM">
+                                        Text="{Binding WARProgressBarForeground, Source={x:Static PluginProperties:Settings.Default}}" />
+                                </teast:GroupBox>
+                                <teast:GroupBox Header="WHM">
                                     <TextBox
-                                        Text="{Binding WHMProgressBarForeground, Source={StaticResource Settings}}" />
-                                </GroupBox>
-                                <GroupBox Header="SCH">
+                                        Text="{Binding WHMProgressBarForeground, Source={x:Static PluginProperties:Settings.Default}}" />
+                                </teast:GroupBox>
+                                <teast:GroupBox Header="SCH">
                                     <TextBox
-                                        Text="{Binding SCHProgressBarForeground, Source={StaticResource Settings}}" />
-                                </GroupBox>
-                                <GroupBox Header="MNK">
+                                        Text="{Binding SCHProgressBarForeground, Source={x:Static PluginProperties:Settings.Default}}" />
+                                </teast:GroupBox>
+                                <teast:GroupBox Header="MNK">
                                     <TextBox
-                                        Text="{Binding MNKProgressBarForeground, Source={StaticResource Settings}}" />
-                                </GroupBox>
-                                <GroupBox Header="BRD">
+                                        Text="{Binding MNKProgressBarForeground, Source={x:Static PluginProperties:Settings.Default}}" />
+                                </teast:GroupBox>
+                                <teast:GroupBox Header="BRD">
                                     <TextBox
-                                        Text="{Binding BRDProgressBarForeground, Source={StaticResource Settings}}" />
-                                </GroupBox>
-                                <GroupBox Header="SMN">
+                                        Text="{Binding BRDProgressBarForeground, Source={x:Static PluginProperties:Settings.Default}}" />
+                                </teast:GroupBox>
+                                <teast:GroupBox Header="SMN">
                                     <TextBox
-                                        Text="{Binding SMNProgressBarForeground, Source={StaticResource Settings}}" />
-                                </GroupBox>
+                                        Text="{Binding SMNProgressBarForeground, Source={x:Static PluginProperties:Settings.Default}}" />
+                                </teast:GroupBox>
                             </StackPanel>
                         </Expander>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem x:Name="SettingsWidgetsTI"
-                     Header="{Binding Locale[parse_WidgetSettingsTabHeader], Source={StaticResource PluginViewModel}}">
+            <TabItem x:Name="SettingsWidgetsTI">
+                <TabItem.Header>
+                    <TextBlock Text="{Binding Locale[parse_WidgetSettingsTabHeader], Source={x:Static parse:PluginViewModel.Instance}}" />
+                </TabItem.Header>
                 <ScrollViewer>
                     <StackPanel>
                         <Expander
-                            Header="{Binding Locale[parse_DPSWidgetSettingsTabLabel], Source={StaticResource PluginViewModel}}">
+                            Header="{Binding Locale[parse_DPSWidgetSettingsTabLabel], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_UIScaleHeader], Source={StaticResource PluginViewModel}}">
+                                <!-- TODO: UI scaling
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_UIScaleHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding DPSWidgetUIScaleList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding DPSWidgetUIScale, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding DPSWidgetUIScaleList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding DPSWidgetUIScale, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_SortDirectionHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                -->
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_SortDirectionHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding DPSWidgetSortDirectionList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding DPSWidgetSortDirection, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding DPSWidgetSortDirectionList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding DPSWidgetSortDirection, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_SortPropertyHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_SortPropertyHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding DPSWidgetSortPropertyList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding DPSWidgetSortProperty, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding DPSWidgetSortPropertyList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding DPSWidgetSortProperty, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_DisplayPropertyHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_DisplayPropertyHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding DPSWidgetDisplayPropertyList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding DPSWidgetDisplayProperty, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding DPSWidgetDisplayPropertyList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding DPSWidgetDisplayProperty, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_PlayerVisibilityThresholdHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_PlayerVisibilityThresholdHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding DPSVisibilityList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding DPSVisibility, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding DPSVisibilityList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding DPSVisibility, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
+                                </teast:GroupBox>
                             </StackPanel>
                         </Expander>
                         <Expander
-                            Header="{Binding Locale[parse_DTPSWidgetSettingsTabLabel], Source={StaticResource PluginViewModel}}">
+                            Header="{Binding Locale[parse_DTPSWidgetSettingsTabLabel], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_UIScaleHeader], Source={StaticResource PluginViewModel}}">
+                                <!-- TODO: UI scaling
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_UIScaleHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding DTPSWidgetUIScaleList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding DTPSWidgetUIScale, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding DTPSWidgetUIScaleList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding DTPSWidgetUIScale, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_SortDirectionHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                -->
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_SortDirectionHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding DTPSWidgetSortDirectionList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding DTPSWidgetSortDirection, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding DTPSWidgetSortDirectionList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding DTPSWidgetSortDirection, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_SortPropertyHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_SortPropertyHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding DTPSWidgetSortPropertyList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding DTPSWidgetSortProperty, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding DTPSWidgetSortPropertyList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding DTPSWidgetSortProperty, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_DisplayPropertyHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_DisplayPropertyHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding DTPSWidgetDisplayPropertyList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding DTPSWidgetDisplayProperty, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding DTPSWidgetDisplayPropertyList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding DTPSWidgetDisplayProperty, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_PlayerVisibilityThresholdHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_PlayerVisibilityThresholdHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding DTPSVisibilityList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding DTPSVisibility, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding DTPSVisibilityList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding DTPSVisibility, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
+                                </teast:GroupBox>
                             </StackPanel>
                         </Expander>
                         <Expander
-                            Header="{Binding Locale[parse_HPSWidgetSettingsTabLabel], Source={StaticResource PluginViewModel}}">
+                            Header="{Binding Locale[parse_HPSWidgetSettingsTabLabel], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_UIScaleHeader], Source={StaticResource PluginViewModel}}">
+                                <!-- TODO: UI scaling
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_UIScaleHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding HPSWidgetUIScaleList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding HPSWidgetUIScale, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding HPSWidgetUIScaleList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding HPSWidgetUIScale, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_SortDirectionHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                -->
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_SortDirectionHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding HPSWidgetSortDirectionList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding HPSWidgetSortDirection, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding HPSWidgetSortDirectionList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding HPSWidgetSortDirection, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_SortPropertyHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_SortPropertyHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding HPSWidgetSortPropertyList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding HPSWidgetSortProperty, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding HPSWidgetSortPropertyList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding HPSWidgetSortProperty, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_DisplayPropertyHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_DisplayPropertyHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding HPSWidgetDisplayPropertyList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding HPSWidgetDisplayProperty, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding HPSWidgetDisplayPropertyList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding HPSWidgetDisplayProperty, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
-                                <GroupBox
-                                    Header="{Binding Locale[parse_PlayerVisibilityThresholdHeader], Source={StaticResource PluginViewModel}}">
+                                </teast:GroupBox>
+                                <teast:GroupBox
+                                    Header="{Binding Locale[parse_PlayerVisibilityThresholdHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                                     <StackPanel>
-                                        <ComboBox Margin="5"
-                                                  IsReadOnly="False"
-                                                  ItemsSource="{Binding HPSVisibilityList, Source={StaticResource Settings}}"
-                                                  SelectedValue="{Binding HPSVisibility, Source={StaticResource Settings}}" />
+                                        <DropDown Margin="5"
+                                                  Items="{Binding HPSVisibilityList, Source={x:Static PluginProperties:Settings.Default}}"
+                                                  SelectedItem="{Binding HPSVisibility, Source={x:Static PluginProperties:Settings.Default}}" />
                                     </StackPanel>
-                                </GroupBox>
+                                </teast:GroupBox>
                             </StackPanel>
                         </Expander>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem x:Name="SettingsColumnDisplayTI"
-                     Header="{Binding Locale[parse_ColumnDisplaySettingsTabHeader], Source={StaticResource PluginViewModel}}">
+            <TabItem x:Name="SettingsColumnDisplayTI">
+                <TabItem.Header>
+                    <TextBlock Text="{Binding Locale[parse_ColumnDisplaySettingsTabHeader], Source={x:Static parse:PluginViewModel.Instance}}" />
+                </TabItem.Header>
                 <ScrollViewer>
-                    <controls:ColumnDisplaySettings />
+                    <!-- TODO: <controls:ColumnDisplaySettings /> -->
                 </ScrollViewer>
             </TabItem>
-            <TabItem x:Name="SettingsBasicDisplayTI"
-                     Header="{Binding Locale[parse_BasicDisplaySettingsTabHeader], Source={StaticResource PluginViewModel}}">
+            <TabItem x:Name="SettingsBasicDisplayTI">
+                <TabItem.Header>
+                    <TextBlock Text="{Binding Locale[parse_BasicDisplaySettingsTabHeader], Source={x:Static parse:PluginViewModel.Instance}}" />
+                </TabItem.Header>
                 <ScrollViewer>
-                    <controls:BasicDisplaySettings />
+                    <!-- TODO: <controls:BasicDisplaySettings /> -->
                 </ScrollViewer>
             </TabItem>
             <TabItem x:Name="SettingsBasicCombinedDisplayTI"
-                     Header="{Binding Locale[parse_BasicCombinedDisplaySettingsTabHeader], Source={StaticResource PluginViewModel}}">
+                     Header="{Binding Locale[parse_BasicCombinedDisplaySettingsTabHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                 <ScrollViewer>
-                    <controls:BasicCombinedDisplaySettings />
+                    <!-- TODO: <controls:BasicCombinedDisplaySettings /> -->
                 </ScrollViewer>
             </TabItem>
             <TabItem x:Name="SettingsOtherTI"
-                     Header="{Binding Locale[app_OtherOptionsTabHeader], Source={StaticResource PluginViewModel}}">
+                     Header="{Binding Locale[app_OtherOptionsTabHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                 <ScrollViewer>
                     <StackPanel>
-                        <GroupBox
-                            Header="{Binding Locale[parse_TrackXPSFromParseStartEventHeader], Source={StaticResource PluginViewModel}}">
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_TrackXPSFromParseStartEventHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
                                 <TextBlock Foreground="{DynamicResource BlackColorBrush}"
-                                           Text="{Binding Locale[parse_TrackXPSFromParseStartEventHelpText], Source={StaticResource PluginViewModel}}"
-                                           TextWrapping="WrapWithOverflow"
-                                           Visibility="{Binding EnableHelpLabels, Source={StaticResource PluginViewModel}, Converter={StaticResource VisibilityConverter}}" />
-                                <MetroControls:ToggleSwitch
-                                    IsChecked="{Binding TrackXPSFromParseStartEvent, Source={StaticResource Settings}}" />
+                                           Text="{Binding Locale[parse_TrackXPSFromParseStartEventHelpText], Source={x:Static parse:PluginViewModel.Instance}}"
+                                           TextWrapping="Wrap"
+                                           IsVisible="{Binding EnableHelpLabels, Source={x:Static parse:PluginViewModel.Instance}}" /> <!-- TODO :, Converter={StaticResource VisibilityConverter}}" /> -->
+                                <CheckBox
+                                    IsChecked="{Binding TrackXPSFromParseStartEvent, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_IgnoreLimitBreaksHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_IgnoreLimitBreaksHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch
-                                    IsChecked="{Binding IgnoreLimitBreaks, Source={StaticResource Settings}}" />
+                                <CheckBox
+                                    IsChecked="{Binding IgnoreLimitBreaks, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_EnableStoreHistoryResetHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_EnableStoreHistoryResetHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch
-                                    IsChecked="{Binding EnableStoreHistoryReset, Source={StaticResource Settings}}" />
+                                <CheckBox
+                                    IsChecked="{Binding EnableStoreHistoryReset, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_AutoLoadLastParseFromHistoryHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_AutoLoadLastParseFromHistoryHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch
-                                    IsChecked="{Binding AutoLoadLastParseFromHistory, Source={StaticResource Settings}}" />
+                                <CheckBox
+                                    IsChecked="{Binding AutoLoadLastParseFromHistory, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_StoreHistoryIntervalHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_StoreHistoryIntervalHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
                                 <TextBox x:Name="StoreHistoryInterval"
                                          Margin="5"
-                                         VerticalContentAlignment="Center"
-                                         AutoWordSelection="True"
-                                         MaxLength="32"
-                                         Text="{Binding StoreHistoryInterval, Source={StaticResource Settings}}" />
+                                         VerticalAlignment="Center"
+                                         Text="{Binding StoreHistoryInterval, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
-                        <GroupBox
-                            Header="{Binding Locale[parse_StoreHistoryEventHeader], Source={StaticResource PluginViewModel}}">
+                        </teast:GroupBox>
+                        <teast:GroupBox
+                            Header="{Binding Locale[parse_StoreHistoryEventHeader], Source={x:Static parse:PluginViewModel.Instance}}">
                             <StackPanel>
                                 <TextBlock Foreground="{DynamicResource BlackColorBrush}"
-                                           Text="{Binding Locale[parse_StoreHistoryEventHelperText], Source={StaticResource PluginViewModel}}"
-                                           TextWrapping="WrapWithOverflow"
-                                           Visibility="{Binding EnableHelpLabels, Source={StaticResource PluginViewModel}, Converter={StaticResource VisibilityConverter}}" />
-                                <ComboBox x:Name="StoreHistoryEvent"
+                                           Text="{Binding Locale[parse_StoreHistoryEventHelperText], Source={x:Static parse:PluginViewModel.Instance}}"
+                                           TextWrapping="Wrap"
+                                           IsVisible="{Binding EnableHelpLabels, Source={x:Static parse:PluginViewModel.Instance}}" /> <!-- TODO:, Converter={StaticResource VisibilityConverter}}" /> -->
+                                <DropDown x:Name="StoreHistoryEvent"
                                           Margin="5"
-                                          IsReadOnly="False"
-                                          ItemsSource="{Binding StoreHistoryEventList, Source={StaticResource Settings}}"
-                                          SelectedValue="{Binding StoreHistoryEvent, Source={StaticResource Settings}}" />
+                                          Items="{Binding StoreHistoryEventList, Source={x:Static PluginProperties:Settings.Default}}"
+                                          SelectedItem="{Binding StoreHistoryEvent, Source={x:Static PluginProperties:Settings.Default}}" />
                             </StackPanel>
-                        </GroupBox>
+                        </teast:GroupBox>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

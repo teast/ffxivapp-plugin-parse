@@ -9,12 +9,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace FFXIVAPP.Plugin.Parse.Helpers {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Windows;
-
+    
     using FFXIVAPP.Plugin.Parse.Localization;
 
     internal static class LocaleHelper {
@@ -23,7 +21,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
         /// <param name="cultureInfo"> </param>
         public static Dictionary<string, string> Update(CultureInfo cultureInfo) {
             var culture = cultureInfo.TwoLetterISOLanguageName;
-            ResourceDictionary dictionary;
+            Dictionary<string, string> dictionary;
             if (Constants.Supported.Contains(culture)) {
                 switch (culture) {
                     case "fr":
@@ -50,7 +48,8 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                 dictionary = English.Context();
             }
 
-            return dictionary.Cast<DictionaryEntry>().ToDictionary(item => (string) item.Key, item => (string) item.Value);
+            var e = dictionary.ToDictionary(val => val.Key, val => val.Value);
+            return e;
         }
     }
 }

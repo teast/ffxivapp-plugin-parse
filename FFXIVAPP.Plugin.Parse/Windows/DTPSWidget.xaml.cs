@@ -12,38 +12,49 @@ namespace FFXIVAPP.Plugin.Parse.Windows {
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
-
+    using Avalonia.Controls;
+    using Avalonia.Markup.Xaml;
     using FFXIVAPP.Plugin.Parse.Interop;
     using FFXIVAPP.Plugin.Parse.Properties;
 
     /// <summary>
     ///     Interaction logic for DTPSWidget.xaml
     /// </summary>
-    public partial class DTPSWidget {
+    public class DTPSWidget: BaseWindow {
         public static DTPSWidget View;
 
         public DTPSWidget() {
             View = this;
             this.InitializeComponent();
+            /* TODO: View access + WinAPI ClickThrough
             View.SourceInitialized += delegate {
                 WinAPI.ToggleClickThrough(this);
             };
+            */
         }
 
+        private void InitializeComponent() {
+            AvaloniaXamlLoader.Load(this);
+        }
+
+        /* TODO: LeftClick event on TitleBar
         private void TitleBar_OnPreviewMouseDown(object sender, MouseButtonEventArgs e) {
             if (Mouse.LeftButton == MouseButtonState.Pressed) {
                 this.DragMove();
             }
         }
-
+        */
+        
         private void Widget_OnClosing(object sender, CancelEventArgs e) {
             e.Cancel = true;
             this.Hide();
         }
 
+        /* TODO: Click on Close
         private void WidgetClose_OnClick(object sender, RoutedEventArgs e) {
             Settings.Default.ShowDTPSWidgetOnLoad = false;
             this.Close();
         }
+        */
     }
 }

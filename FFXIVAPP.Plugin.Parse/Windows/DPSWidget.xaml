@@ -1,13 +1,11 @@
 ﻿<Window x:Class="FFXIVAPP.Plugin.Parse.Windows.DPSWidget"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:PluginProperties="clr-namespace:FFXIVAPP.Plugin.Parse.Properties"
         xmlns:ViewModels="clr-namespace:FFXIVAPP.Plugin.Parse.Windows"
         xmlns:commonConverters="clr-namespace:FFXIVAPP.Common.Converters;assembly=FFXIVAPP.Common"
         xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:converters="clr-namespace:FFXIVAPP.Plugin.Parse.Converters"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:parse="clr-namespace:FFXIVAPP.Plugin.Parse"
         Title="DPSWidget"
         Width="{Binding DPSWidgetWidth,
@@ -20,20 +18,32 @@
         MinHeight="360"
         MaxWidth="375"
         MaxHeight="600"
-        AllowsTransparency="True"
-        Background="Transparent"
+        Background="White"
+        HasSystemDecorations="False"
+        ShowInTaskbar="False"
+        Topmost="True"
+        Padding="0"
+        Margin="0">
+        <!--
+        Opacity="{Binding WidgetOpacity,
+                          Source={x:Static PluginProperties:Settings.Default}}">
+        -->
+<!-- TODO: Closing event somewhere?
         Closing="Widget_OnClosing"
+-->
+<!-- TODO: Use Position (type Point) to handle Left and Top
         Left="{Binding DPSWidgetLeft,
                        Mode=TwoWay,
                        Source={x:Static PluginProperties:Settings.Default}}"
-        Opacity="{Binding WidgetOpacity,
-                          Source={x:Static PluginProperties:Settings.Default}}"
-        ResizeMode="NoResize"
-        ShowInTaskbar="False"
         Top="{Binding DPSWidgetTop,
                       Mode=TwoWay,
                       Source={x:Static PluginProperties:Settings.Default}}"
-        WindowStyle="None">
+-->
+    <Window.Resources>
+        <converters:StringToBrushConverter x:Key="StringToBrushConverter" />
+    </Window.Resources>
+
+<!--
     <Window.Resources>
         <ResourceDictionary>
             <x:Static x:Key="PluginViewModel"
@@ -51,21 +61,22 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-
+-->
     <Grid x:Name="LayoutRoot">
+    <!-- TODO: Grid.LayoutTransform
         <Grid.LayoutTransform>
             <ScaleTransform
                 ScaleX="{Binding DPSWidgetUIScale,
-                                             Source={StaticResource Settings}}"
+                                             Source={x:Static PluginProperties:Settings.Default}}"
                 ScaleY="{Binding DPSWidgetUIScale,
-                                             Source={StaticResource Settings}}" />
+                                             Source={x:Static PluginProperties:Settings.Default}}" />
         </Grid.LayoutTransform>
+        -->
         <StackPanel>
             <DockPanel LastChildFill="True"
-                       Visibility="{Binding ShowTitlesOnWidgets,
-                                            Source={StaticResource Settings},
-                                            Converter={StaticResource VisibilityConverter}}">
-                <Border Margin="5 0 5 5"
+                       IsVisible="{Binding ShowTitlesOnWidgets,
+                                            Source={x:Static PluginProperties:Settings.Default}}">
+                <Border Margin="0 0 0 5"
                         Background="WhiteSmoke"
                         BorderBrush="Black"
                         BorderThickness="1"
@@ -75,16 +86,15 @@
                                 Width="15"
                                 Height="15"
                                 Margin="2"
-                                Click="WidgetClose_OnClick"
                                 DockPanel.Dock="Right"
                                 Padding="0"
-                                ToolTip="Close">
+                                ToolTip.Tip="Close">
                             <Path Data="M0,0 L5,5 M0,5 L5,0"
                                   Stretch="None"
                                   Stroke="Black" />
                         </Button>
-                        <DockPanel Background="WhiteSmoke"
-                                   PreviewMouseDown="TitleBar_OnPreviewMouseDown">
+                        <DockPanel x:Name="TitleBar" Background="WhiteSmoke">
+                                   <!-- TODO: DockPanel: PreviewMouseDown="TitleBar_OnPreviewMouseDown">-->
                             <Grid>
                                 <TextBlock Grid.Row="0"
                                            Margin="5 -1"
@@ -92,31 +102,28 @@
                                            FontSize="14"
                                            FontWeight="Bold"
                                            Foreground="Black"
-                                           Padding="0"
                                            Text="{Binding Locale[parse_DPSTitleBar],
-                                                          Source={StaticResource PluginViewModel}}" />
+                                                          Source={x:Static parse:PluginViewModel.Instance}}" />
                                 <TextBlock Grid.Row="0"
                                            Margin="5 2"
                                            HorizontalAlignment="Left"
                                            FontSize="10"
                                            FontWeight="Bold"
                                            Foreground="Black"
-                                           Padding="0"
                                            Text="FFXIV-APP" />
                             </Grid>
                         </DockPanel>
                     </DockPanel>
                 </Border>
             </DockPanel>
-            <ItemsControl x:Name="Party">
+            <ItemsControl x:Name="Party" Items="{Binding ParseEntity.Players, Source={x:Static ViewModels:DPSWidgetViewModel.Instance}}">
+            <!-- TODO: Resource, CollectionViewSource
                 <ItemsControl.Resources>
                     <CollectionViewSource x:Key="Party"
                                           Source="{Binding ParseEntity.Players,
                                                            Source={StaticResource DPSWidgetViewModel}}" />
                 </ItemsControl.Resources>
-                <ItemsControl.ItemsSource>
-                    <Binding Source="{StaticResource Party}" />
-                </ItemsControl.ItemsSource>
+            -->
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="5 1">
@@ -124,7 +131,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
+                                    <!--<RowDefinition Height="*" />-->
                                 </Grid.RowDefinitions>
                                 <Border Grid.Row="1"
                                         Margin="5 0"
@@ -141,25 +148,29 @@
                                                        FontSize="12"
                                                        FontWeight="Bold"
                                                        Foreground="Black"
-                                                       Style="{StaticResource DecimalStyle}"
                                                        Tag="DPS"
                                                        Text="{Binding DPS,
-                                                                      StringFormat={}{0:F2}}"
-                                                       Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                                      StringFormat=\{0:F2\}}" />
+                                                        <!-- TODO: RelativeSouce Binding
+                                                       IsVisible="{Binding RelativeSource={RelativeSource Self},
                                                                             Path=Tag,
                                                                             Converter={StaticResource StringToVisibilityConverter}}" />
+                                                                            -->
+                                            <!-- TODO: temp to hide one of the textblocks
                                             <TextBlock Margin="5 0"
                                                        HorizontalAlignment="Left"
                                                        FontSize="12"
                                                        FontWeight="Bold"
                                                        Foreground="Black"
-                                                       Style="{StaticResource DecimalStyle}"
                                                        Tag="CombinedDPS"
                                                        Text="{Binding CombinedDPS,
-                                                                      StringFormat={}{0:F2}}"
-                                                       Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                                      StringFormat=\{0:F2\}}" />
+                                            -->
+                                                            <!-- TODO: RelativeSource:
+                                                       IsVisible="{Binding RelativeSource={RelativeSource Self},
                                                                             Path=Tag,
                                                                             Converter={StaticResource StringToVisibilityConverter}}" />
+                                                                            -->
                                         </DockPanel>
                                         <DockPanel>
                                             <TextBlock Margin="5 0"
@@ -167,48 +178,55 @@
                                                        FontSize="12"
                                                        FontWeight="Bold"
                                                        Foreground="Black"
-                                                       Style="{StaticResource StatLabelStyle}"
                                                        Text="{Binding Name}" />
                                         </DockPanel>
                                     </DockPanel>
                                 </Border>
+                                <!-- TODO: Removed Grid.RowSpan="2" from ProgressBar -->
                                 <ProgressBar Grid.Row="0"
-                                             Grid.RowSpan="2"
                                              Height="18"
                                              VerticalAlignment="Top"
                                              BorderBrush="Black"
-                                             Foreground="{Binding Job,
-                                                                  Converter={StaticResource StringToBrushConverter}}"
                                              Maximum="1"
                                              Minimum="0"
+                                             Value="{Binding PercentOfTotalOverallDamage}"
+                                             Foreground="{Binding Job,
+                                                                  Converter={StaticResource StringToBrushConverter}}" />
+                                            <!-- TODO: ProgressBar, Style
                                              Style="{StaticResource ProgressBarStyleStopAnimation}"
-                                             Value="{Binding PercentOfTotalOverallDamage}" />
+                                             -->
+                                <!-- TODO: Foreground Converter (for progressbar)
+                                             Foreground="{Binding Job,
+                                                                  Converter={StaticResource StringToBrushConverter}}"
+                                -->
                                 <TextBlock Grid.Row="0"
                                            Margin="5 0"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Center"
                                            FontWeight="Bold"
                                            Foreground="Black"
-                                           Style="{StaticResource CommaNumberStyle}"
                                            Tag="TotalOverallDamage"
                                            Text="{Binding TotalOverallDamage,
-                                                          StringFormat={}{0:N0}}"
-                                           Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                          StringFormat=\{0:N0\}}" />
+                                            <!-- TODO: Relativesource Converter
+                                           IsVisible="{Binding RelativeSource={RelativeSource Self},
                                                                 Path=Tag,
                                                                 Converter={StaticResource StringToVisibilityConverter}}" />
+                                            -->
                                 <TextBlock Grid.Row="0"
                                            Margin="5 0"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Center"
                                            FontWeight="Bold"
                                            Foreground="Black"
-                                           Style="{StaticResource CommaNumberStyle}"
                                            Tag="CombinedTotalOverallDamage"
                                            Text="{Binding CombinedTotalOverallDamage,
-                                                          StringFormat={}{0:N0}}"
-                                           Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                          StringFormat=\{0:N0\}}" />
+                                            <!-- TODO: RelativeSource Converter
+                                           IsVisible="{Binding RelativeSource={RelativeSource Self},
                                                                 Path=Tag,
                                                                 Converter={StaticResource StringToVisibilityConverter}}" />
+                                            -->
                                 <StackPanel Grid.Row="0"
                                             Margin="5 0"
                                             HorizontalAlignment="Right"
@@ -218,19 +236,15 @@
                                                VerticalAlignment="Center"
                                                FontWeight="Bold"
                                                Foreground="Black"
-                                               Style="{StaticResource PercentStyle}"
                                                Text="{Binding PercentOfTotalOverallDamage,
-                                                              StringFormat={}{0:P}}" />
+                                                              StringFormat=\{0:P\}}" />
                                     <TextBlock Margin="3 0"
                                                VerticalAlignment="Center"
                                                FontWeight="Bold"
                                                Foreground="Black"
-                                               Style="{StaticResource StatLabelStyle}"
-                                               Text="{Binding Job,
-                                                              StringFormat=[{0}]}"
-                                               Visibility="{Binding ShowJobNameInWidgets,
-                                                                    Source={StaticResource Settings},
-                                                                    Converter={StaticResource VisibilityConverter}}" />
+                                               Text="{Binding Job, StringFormat=[\{0\}]}"
+                                               IsVisible="{Binding ShowJobNameInWidgets,
+                                                                    Source={x:Static PluginProperties:Settings.Default}}" />
                                 </StackPanel>
                             </Grid>
                         </StackPanel>

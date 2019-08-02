@@ -8,16 +8,23 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+
 namespace FFXIVAPP.Plugin.Parse.Views {
     /// <summary>
     ///     Interaction logic for AboutView.xaml
     /// </summary>
-    public partial class AboutView {
+    public class AboutView: BaseUserControl {
         public static AboutView View;
 
         public AboutView() {
             this.InitializeComponent();
             View = this;
+        }
+
+        private void InitializeComponent() {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

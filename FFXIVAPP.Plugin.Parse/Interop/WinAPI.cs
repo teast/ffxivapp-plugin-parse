@@ -13,7 +13,7 @@ namespace FFXIVAPP.Plugin.Parse.Interop {
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Windows;
-    using System.Windows.Interop;
+    //using System.Windows.Interop;
 
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
@@ -53,6 +53,7 @@ namespace FFXIVAPP.Plugin.Parse.Interop {
         [DllImport("user32.dll")]
         public static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc, WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
 
+        /* TODO: How do we get hwnd from an Avalonia window?
         public static void ToggleClickThrough(Window window) {
             try {
                 IntPtr hWnd = new WindowInteropHelper(window).Handle;
@@ -67,7 +68,8 @@ namespace FFXIVAPP.Plugin.Parse.Interop {
                 Logging.Log(Logger, new LogItem(ex, true));
             }
         }
-
+        */
+        
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hwnd, int index);
 

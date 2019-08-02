@@ -139,6 +139,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
                 subMonsterGroup.Stats.IncrementStat(modStat, mod);
                 subMonsterAbilityGroup.Stats.IncrementStat(modStat, mod);
             }
+
+            System.Console.WriteLine($"Dmg update: now: {line.Amount} (crit: {line.Crit}), Total: {this.Stats.GetStatValue("TotalDamageActionsUsed")}, crit: {this.Stats.GetStatValue("DamageCritHit")} ");
         }
     }
 }

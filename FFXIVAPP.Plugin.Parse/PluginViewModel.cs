@@ -17,7 +17,7 @@ namespace FFXIVAPP.Plugin.Parse {
     using FFXIVAPP.Common.Events;
     using FFXIVAPP.Common.Helpers;
 
-    internal sealed class PluginViewModel : INotifyPropertyChanged {
+    internal sealed class PluginViewModel : BaseViewModel {
         private static Lazy<PluginViewModel> _instance = new Lazy<PluginViewModel>(() => new PluginViewModel());
 
         private bool _enableHelpLabels;
@@ -84,10 +84,6 @@ namespace FFXIVAPP.Plugin.Parse {
 
         public void OnPopupResultChanged(PopupResultEvent e) {
             this.PopupResultChanged(this, e);
-        }
-
-        private void RaisePropertyChanged([CallerMemberName] string caller = "") {
-            this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
         }
     }
 }

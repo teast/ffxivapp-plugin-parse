@@ -65,6 +65,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
         }
 
         public void ResetDPSWidget() {
+            /* TODO: Settings
             Settings.Default.DPSWidgetUIScale = Settings.Default.Properties["DPSWidgetUIScale"].DefaultValue.ToString();
             Settings.Default.DPSWidgetTop = int.Parse(Settings.Default.Properties["DPSWidgetTop"].DefaultValue.ToString());
             Settings.Default.DPSWidgetLeft = int.Parse(Settings.Default.Properties["DPSWidgetLeft"].DefaultValue.ToString());
@@ -73,9 +74,11 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             Settings.Default.DPSVisibility = Settings.Default.Properties["DPSVisibility"].DefaultValue.ToString();
             Settings.Default.DPSWidgetSortDirection = Settings.Default.Properties["DPSWidgetSortDirection"].DefaultValue.ToString();
             Settings.Default.DPSWidgetSortProperty = Settings.Default.Properties["DPSWidgetSortProperty"].DefaultValue.ToString();
+            */
         }
 
         public void ResetDTPSWidget() {
+            /* TODO: Settings
             Settings.Default.DTPSWidgetUIScale = Settings.Default.Properties["DTPSWidgetUIScale"].DefaultValue.ToString();
             Settings.Default.DTPSWidgetTop = int.Parse(Settings.Default.Properties["DTPSWidgetTop"].DefaultValue.ToString());
             Settings.Default.DTPSWidgetLeft = int.Parse(Settings.Default.Properties["DTPSWidgetLeft"].DefaultValue.ToString());
@@ -84,9 +87,11 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             Settings.Default.DTPSVisibility = Settings.Default.Properties["DTPSVisibility"].DefaultValue.ToString();
             Settings.Default.DTPSWidgetSortDirection = Settings.Default.Properties["DTPSWidgetSortDirection"].DefaultValue.ToString();
             Settings.Default.DTPSWidgetSortProperty = Settings.Default.Properties["DTPSWidgetSortProperty"].DefaultValue.ToString();
+            */
         }
 
         public void ResetHPSWidget() {
+            /* TODO: Settings
             Settings.Default.HPSWidgetUIScale = Settings.Default.Properties["HPSWidgetUIScale"].DefaultValue.ToString();
             Settings.Default.HPSWidgetTop = int.Parse(Settings.Default.Properties["HPSWidgetTop"].DefaultValue.ToString());
             Settings.Default.HPSWidgetLeft = int.Parse(Settings.Default.Properties["HPSWidgetLeft"].DefaultValue.ToString());
@@ -95,6 +100,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             Settings.Default.HPSVisibility = Settings.Default.Properties["HPSVisibility"].DefaultValue.ToString();
             Settings.Default.HPSWidgetSortDirection = Settings.Default.Properties["HPSWidgetSortDirection"].DefaultValue.ToString();
             Settings.Default.HPSWidgetSortProperty = Settings.Default.Properties["HPSWidgetSortProperty"].DefaultValue.ToString();
+            */
         }
 
         private void RaisePropertyChanged([CallerMemberName] string caller = "") {

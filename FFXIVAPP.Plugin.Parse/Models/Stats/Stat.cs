@@ -12,7 +12,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats {
     using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using PropertyChanged;
 
+    [DoNotNotify]
     public abstract class Stat<T> : INotifyPropertyChanged {
         private string _name;
 

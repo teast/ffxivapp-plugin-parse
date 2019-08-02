@@ -10,11 +10,12 @@
 
 namespace FFXIVAPP.Plugin.Parse.Converters {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
-    using System.Windows.Data;
+    using Avalonia.Data.Converters;
 
     public class NameMultiValueConverter : IMultiValueConverter {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture) {
+        public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture) {
             return $"{values[0]} ({values[1]})";
         }
 

@@ -11,19 +11,23 @@
 namespace FFXIVAPP.Plugin.Parse.Windows {
     using System.Collections.Generic;
     using System.Windows;
-
+    using Avalonia.Controls;
+    using Avalonia.Markup.Xaml;
     using FFXIVAPP.Common.Helpers;
-
-    using MahApps.Metro.Controls;
 
     /// <summary>
     ///     Interaction logic for xMetroWindowDataGrid.xaml
     /// </summary>
-    public partial class xMetroWindowDataGrid {
+    public class xMetroWindowDataGrid: BaseWindow {
         public xMetroWindowDataGrid() {
             this.InitializeComponent();
         }
 
+        private void InitializeComponent() {
+            AvaloniaXamlLoader.Load(this);
+        }
+
+        /* TODO: xMetroWindow OnLoaded event
         private void XMetroWindowDataGrid_OnLoaded(object sender, RoutedEventArgs e) {
             ThemeHelper.ChangeTheme(
                 Constants.Theme,
@@ -31,5 +35,6 @@ namespace FFXIVAPP.Plugin.Parse.Windows {
                     this
                 });
         }
+        */
     }
 }

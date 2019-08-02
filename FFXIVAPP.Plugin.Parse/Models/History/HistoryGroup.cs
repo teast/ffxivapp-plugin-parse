@@ -87,6 +87,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.History {
             }
         }
 
+        public double ActivePercent => Stats.GetStatValue(nameof(ActivePercent));
+
         public void Add(HistoryGroup item) {
             this.ChildContainer.TryAdd(item.Name, item);
         }
