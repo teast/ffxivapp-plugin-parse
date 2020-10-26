@@ -8,30 +8,1219 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace FFXIVAPP.Plugin.Parse.Properties {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.Specialized;
+namespace FFXIVAPP.Plugin.Parse.Properties
+{
     using System.ComponentModel;
-    using System.Configuration;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Globalization;
-    using System.IO;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Windows.Media;
-    using System.Xml.Linq;
-
-    using FFXIVAPP.Common.Helpers;
-    using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
-
     using NLog;
 
-    using ColorConverter = System.Windows.Media.ColorConverter;
-    using FontFamily = System.Drawing.FontFamily;
+    internal class Settings : INotifyPropertyChanged
+    {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+        private static Settings _default;
+
+        public new event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public static Settings Default
+        {
+            get
+            {
+                return _default ?? (_default = new Settings());
+            }
+        }
+
+        /// <summary>
+        /// Contains defualt values
+        /// </summary>
+        public Settings Properties => new DefaultValues();
+
+        public Settings()
+        {
+            StoreHistoryInterval = 10000;
+        }
+
+        public void Save()
+        {
+            Logging.Log(Logger, $"TODO: Settings.Save.");
+        }
+
+        public static void SetValue(string name, string value, System.Globalization.CultureInfo culture)
+        {
+            Logging.Log(Logger, $"TODO: Settings.SetValue called with \"{name}\", value: \"{value}\".");
+        }
+
+        private class DefaultValues: Settings
+        {
+            public DefaultValues()
+            {
+                StoreHistoryInterval = 10000;
+            }
+        }
+
+        private void Set<T>(ref T property, T value, [CallerMemberName] string name = "")
+        {
+            property = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        #region Properties
+        public bool ShowColumnTotalOverallDamage
+        {
+            get => _showColumnTotalOverallDamage;
+            set => Set(ref _showColumnTotalOverallDamage, value);
+        }
+
+        public bool ShowColumnRegularDamage
+        {
+            get => _showColumnRegularDamage;
+            set => Set(ref _showColumnRegularDamage, value);
+        }
+
+        public bool ShowColumnCriticalDamage
+        {
+            get => _showColumnCriticalDamage;
+            set => Set(ref _showColumnCriticalDamage, value);
+        }
+
+        public bool ShowColumnDPS
+        {
+            get => _showColumnDPS;
+            set => Set(ref _showColumnDPS, value);
+        }
+
+        public bool ShowColumnDamageRegLow
+        {
+            get => _showColumnDamageRegLow;
+            set => Set(ref _showColumnDamageRegLow, value);
+        }
+
+        public bool ShowColumnDamageRegHigh
+        {
+            get => _showColumnDamageRegHigh;
+            set => Set(ref _showColumnDamageRegHigh, value);
+        }
+
+        public bool ShowColumnDamageRegAverage
+        {
+            get => _showColumnDamageRegAverage;
+            set => Set(ref _showColumnDamageRegAverage, value);
+        }
+
+        public bool ShowColumnDamageRegMod
+        {
+            get => _showColumnDamageRegMod;
+            set => Set(ref _showColumnDamageRegMod, value);
+        }
+
+        public bool ShowColumnDamageRegModAverage
+        {
+            get => _showColumnDamageRegModAverage;
+            set => Set(ref _showColumnDamageRegModAverage, value);
+        }
+
+        public bool ShowColumnDamageCritLow
+        {
+            get => _showColumnDamageCritLow;
+            set => Set(ref _showColumnDamageCritLow, value);
+        }
+
+        public bool ShowColumnDamageCritHigh
+        {
+            get => _showColumnDamageCritHigh;
+            set => Set(ref _showColumnDamageCritHigh, value);
+        }
+
+        public bool ShowColumnDamageCritAverage
+        {
+            get => _showColumnDamageCritAverage;
+            set => Set(ref _showColumnDamageCritAverage, value);
+        }
+
+        public bool ShowColumnDamageCritMod
+        {
+            get => _showColumnDamageCritMod;
+            set => Set(ref _showColumnDamageCritMod, value);
+        }
+
+        public bool ShowColumnDamageCritModAverage
+        {
+            get => _showColumnDamageCritModAverage;
+            set => Set(ref _showColumnDamageCritModAverage, value);
+        }
+
+        public double DPSVisibility
+        {
+            get => _dpsVisibility;
+            set => Set(ref _dpsVisibility, value);
+        }
+
+        public double DTPSVisibility
+        {
+            get => _dtpsVisibility;
+            set => Set(ref _dtpsVisibility, value);
+        }
+
+        public double HPSVisibility
+        {
+            get => _hpsVisibility;
+            set => Set(ref _hpsVisibility, value);
+        }
+
+        public string DPSWidgetSortDirection
+        {
+            get => _dpsWidgetSortDirection;
+            set => Set(ref _dpsWidgetSortDirection, value);
+        }
+
+        public string DPSWidgetSortProperty
+        {
+            get => _dpsWidgetSortProperty;
+            set => Set(ref _dpsWidgetSortProperty, value);
+        }
+
+        public string DTPSWidgetSortDirection
+        {
+            get => _dtpsWidgetSortDirection;
+            set => Set(ref _dtpsWidgetSortDirection, value);
+        }
+
+        public string DTPSWidgetSortProperty
+        {
+            get => _dtpsWidgetSortProperty;
+            set => Set(ref _dtpsWidgetSortProperty, value);
+        }
+
+        public string HPSWidgetSortDirection
+        {
+            get => _hpsWidgetSortDirection;
+            set => Set(ref _hpsWidgetSortDirection, value);
+        }
+
+        public string HPSWidgetSortProperty
+        {
+            get => _hpsWidgetSortProperty;
+            set => Set(ref _hpsWidgetSortProperty, value);
+        }
+
+        public bool ParseYou
+        {
+            get => _parseYou;
+            set => Set(ref _parseYou, value);
+        }
+
+        public bool ParseParty
+        {
+            get => _parseParty;
+            set => Set(ref _parseParty, value);
+        }
+
+        public bool ParseAlliance
+        {
+            get => _parseAlliance;
+            set => Set(ref _parseAlliance, value);
+        }
+
+        public bool ParseOther
+        {
+            get => _parseOther;
+            set => Set(ref _parseOther, value);
+        }
+
+        public bool WidgetClickThroughEnabled
+        {
+            get => _widgetClickThroughEnabled;
+            set => Set(ref _widgetClickThroughEnabled, value);
+        }
+
+        public bool TrackXPSFromParseStartEvent
+        {
+            get => _trackXPSFromParseStartEvent;
+            set => Set(ref _trackXPSFromParseStartEvent, value);
+        }
+
+        public bool IgnoreLimitBreaks
+        {
+            get => _ignoreLimitBreaks;
+            set => Set(ref _ignoreLimitBreaks, value);
+        }
+
+
+        public string StoreHistoryEvent
+        {
+            get => _storeHistoryEvent;
+            set => Set(ref _storeHistoryEvent, value);
+        }
+
+
+        public double StoreHistoryInterval
+        {
+            get => _storeHistoryInterval;
+            set => Set(ref _storeHistoryInterval, value);
+        }
+
+
+        public bool EnableStoreHistoryReset
+        {
+            get => _enableStoreHistoryReset;
+            set => Set(ref _enableStoreHistoryReset, value);
+        }
+
+
+        public bool ShowDPSWidgetOnLoad
+        {
+            get => _showDPSWidgetOnLoad;
+            set => Set(ref _showDPSWidgetOnLoad, value);
+        }
+
+        public bool ShowDTPSWidgetOnLoad
+        {
+            get => _showDTPSWidgetOnLoad;
+            set => Set(ref _showDTPSWidgetOnLoad, value);
+        }
+
+        public bool ShowHPSWidgetOnLoad
+        {
+            get => _showHPSWidgetOnLoad;
+            set => Set(ref _showHPSWidgetOnLoad, value);
+        }
+
+        public string DPSWidgetUIScale
+        {
+            get => _dpsWidgetUIScale;
+            set => Set(ref _dpsWidgetUIScale, value);
+        }
+
+        public int DPSWidgetTop
+        {
+            get => _dpsWidgetTop;
+            set => Set(ref _dpsWidgetTop, value);
+        }
+
+        public int DPSWidgetLeft
+        {
+            get => _dpsWidgetLeft;
+            set => Set(ref _dpsWidgetLeft, value);
+        }
+
+        public int DPSWidgetHeight
+        {
+            get => _dpsWidgetHeight;
+            set => Set(ref _dpsWidgetHeight, value);
+        }
+
+        public int DPSWidgetWidth
+        {
+            get => _dpsWidgetWidth;
+            set => Set(ref _dpsWidgetWidth, value);
+        }
+
+        public string DTPSWidgetUIScale
+        {
+            get => _dtpsWidgetUIScale;
+            set => Set(ref _dtpsWidgetUIScale, value);
+        }
+
+        public int DTPSWidgetTop
+        {
+            get => _dtpsWidgetTop;
+            set => Set(ref _dtpsWidgetTop, value);
+        }
+
+        public int DTPSWidgetLeft
+        {
+            get => _dtpsWidgetLeft;
+            set => Set(ref _dtpsWidgetLeft, value);
+        }
+
+
+        public int DTPSWidgetHeight
+        {
+            get => _dtpsWidgetHeight;
+            set => Set(ref _dtpsWidgetHeight, value);
+        }
+
+        public int DTPSWidgetWidth
+        {
+            get => _dtpsWidgetWidth;
+            set => Set(ref _dtpsWidgetWidth, value);
+        }
+
+        public string HPSWidgetUIScale
+        {
+            get => _hpsWidgetUIScale;
+            set => Set(ref _hpsWidgetUIScale, value);
+        }
+
+        public int HPSWidgetTop
+        {
+            get => _hpsWidgetTop;
+            set => Set(ref _hpsWidgetTop, value);
+        }
+
+        public int HPSWidgetLeft
+        {
+            get => _hpsWidgetLeft;
+            set => Set(ref _hpsWidgetLeft, value);
+        }
+
+
+        public int HPSWidgetHeight
+        {
+            get => _hpsWidgetHeight;
+            set => Set(ref _hpsWidgetHeight, value);
+        }
+
+        public int HPSWidgetWidth
+        {
+            get => _hpsWidgetWidth;
+            set => Set(ref _hpsWidgetWidth, value);
+        }
+
+        public bool ShowColumnTotalOverallDamageTaken
+        {
+            get => _showColumnTotalOverallDamageTaken;
+            set => Set(ref _showColumnTotalOverallDamageTaken, value);
+        }
+
+        public bool ShowColumnRegularDamageTaken
+        {
+            get => _showColumnRegularDamageTaken;
+            set => Set(ref _showColumnRegularDamageTaken, value);
+        }
+
+        public bool ShowColumnCriticalDamageTaken
+        {
+            get => _showColumnCriticalDamageTaken;
+            set => Set(ref _showColumnCriticalDamageTaken, value);
+        }
+
+        public bool ShowColumnDTPS
+        {
+            get => _showColumnDTPS;
+            set => Set(ref _showColumnDTPS, value);
+        }
+
+        public bool ShowColumnDamageTakenRegLow
+        {
+            get => _showColumnDamageTakenRegLow;
+            set => Set(ref _showColumnDamageTakenRegLow, value);
+        }
+
+        public bool ShowColumnDamageTakenRegHigh
+        {
+            get => _showColumnDamageTakenRegHigh;
+            set => Set(ref _showColumnDamageTakenRegHigh, value);
+        }
+
+        public bool ShowColumnDamageTakenRegAverage
+        {
+            get => _showColumnDamageTakenRegAverage;
+            set => Set(ref _showColumnDamageTakenRegAverage, value);
+        }
+
+        public bool ShowColumnDamageTakenRegMod
+        {
+            get => _showColumnDamageTakenRegMod;
+            set => Set(ref _showColumnDamageTakenRegMod, value);
+        }
+
+        public bool ShowColumnDamageTakenRegModAverage
+        {
+            get => _showColumnDamageTakenRegModAverage;
+            set => Set(ref _showColumnDamageTakenRegModAverage, value);
+        }
+
+        public bool ShowColumnDamageTakenCritLow
+        {
+            get => _showColumnDamageTakenCritLow;
+            set => Set(ref _showColumnDamageTakenCritLow, value);
+        }
+
+        public bool ShowColumnDamageTakenCritHigh
+        {
+            get => _showColumnDamageTakenCritHigh;
+            set => Set(ref _showColumnDamageTakenCritHigh, value);
+        }
+
+        public bool ShowColumnDamageTakenCritAverage
+        {
+            get => _showColumnDamageTakenCritAverage;
+            set => Set(ref _showColumnDamageTakenCritAverage, value);
+        }
+
+        public bool ShowColumnDamageTakenCritMod
+        {
+            get => _showColumnDamageTakenCritMod;
+            set => Set(ref _showColumnDamageTakenCritMod, value);
+        }
+
+        public bool ShowColumnDamageTakenCritModAverage        
+        {
+            get => _showColumnDamageTakenCritModAverage;
+            set => Set(ref _showColumnDamageTakenCritModAverage, value);
+        }
+
+        public bool ShowColumnTotalOverallHealing
+        {
+            get => _showColumnTotalOverallHealing;
+            set => Set(ref _showColumnTotalOverallHealing, value);
+        }
+
+        public bool ShowColumnRegularHealing
+        {
+            get => _showColumnRegularHealing;
+            set => Set(ref _showColumnRegularHealing, value);
+        }
+
+        public bool ShowColumnCriticalHealing
+        {
+            get => _showColumnCriticalHealing;
+            set => Set(ref _showColumnCriticalHealing, value);
+        }
+
+        public bool ShowColumnHPS
+        {
+            get => _showColumnHPS;
+            set => Set(ref _showColumnHPS, value);
+        }
+
+        public bool ShowColumnHealingRegLow
+        {
+            get => _showColumnHealingRegLow;
+            set => Set(ref _showColumnHealingRegLow, value);
+        }
+
+        public bool ShowColumnHealingRegHigh
+        {
+            get => _showColumnHealingRegHigh;
+            set => Set(ref _showColumnHealingRegHigh, value);
+        }
+
+        public bool ShowColumnHealingRegAverage
+        {
+            get => _showColumnHealingRegAverage;
+            set => Set(ref _showColumnHealingRegAverage, value);
+        }
+
+        public bool ShowColumnHealingRegMod
+        {
+            get => _showColumnHealingRegMod;
+            set => Set(ref _showColumnHealingRegMod, value);
+        }
+
+        public bool ShowColumnHealingRegModAverage
+        {
+            get => _showColumnHealingRegModAverage;
+            set => Set(ref _showColumnHealingRegModAverage, value);
+        }
+
+        public bool ShowColumnHealingCritLow
+        {
+            get => _showColumnHealingCritLow;
+            set => Set(ref _showColumnHealingCritLow, value);
+        }
+
+        public bool ShowColumnHealingCritHigh
+        {
+            get => _showColumnHealingCritHigh;
+            set => Set(ref _showColumnHealingCritHigh, value);
+        }
+
+        public bool ShowColumnHealingCritAverage
+        {
+            get => _showColumnHealingCritAverage;
+            set => Set(ref _showColumnHealingCritAverage, value);
+        }
+
+        public bool ShowColumnHealingCritMod
+        {
+            get => _showColumnHealingCritMod;
+            set => Set(ref _showColumnHealingCritMod, value);
+        }
+
+        public bool ShowColumnHealingCritModAverage
+        {
+            get => _showColumnHealingCritModAverage;
+            set => Set(ref _showColumnHealingCritModAverage, value);
+        }
+
+        public bool ShowColumnPercentOfTotalOverallDamage
+        {
+            get => _showColumnPercentOfTotalOverallDamage;
+            set => Set(ref _showColumnPercentOfTotalOverallDamage, value);
+        }
+
+        public bool ShowColumnPercentOfRegularDamage
+        {
+            get => _showColumnPercentOfRegularDamage;
+            set => Set(ref _showColumnPercentOfRegularDamage, value);
+        }
+
+        public bool ShowColumnPercentOfCriticalDamage
+        {
+            get => _showColumnPercentOfCriticalDamage;
+            set => Set(ref _showColumnPercentOfCriticalDamage, value);
+        }
+
+        public bool ShowColumnTotalDamageActionsUsed
+        {
+            get => _showColumnTotalDamageActionsUsed;
+            set => Set(ref _showColumnTotalDamageActionsUsed, value);
+        }
+
+        public bool ShowColumnDamageRegHit
+        {
+            get => _showColumnDamageRegHit;
+            set => Set(ref _showColumnDamageRegHit, value);
+        }
+
+        public bool ShowColumnDamageRegMiss
+        {
+            get => _showColumnDamageRegMiss;
+            set => Set(ref _showColumnDamageRegMiss, value);
+        }
+
+        public bool ShowColumnDamageRegAccuracy
+        {
+            get => _showColumnDamageRegAccuracy;
+            set => Set(ref _showColumnDamageRegAccuracy, value);
+        }
+
+        public bool ShowColumnDamageCritHit
+        {
+            get => _showColumnDamageCritHit;
+            set => Set(ref _showColumnDamageCritHit, value);
+        }
+
+        public bool ShowColumnDamageCritPercent
+        {
+            get => _showColumnDamageCritPercent;
+            set => Set(ref _showColumnDamageCritPercent, value);
+        }
+
+        public bool ShowColumnDamageCounter
+        {
+            get => _showColumnDamageCounter;
+            set => Set(ref _showColumnDamageCounter, value);
+        }
+
+        public bool ShowColumnDamageCounterPercent
+        {
+            get => _showColumnDamageCounterPercent;
+            set => Set(ref _showColumnDamageCounterPercent, value);
+        }
+
+        public bool ShowColumnDamageCounterMod
+        {
+            get => _showColumnDamageCounterMod;
+            set => Set(ref _showColumnDamageCounterMod, value);
+        }
+
+        public bool ShowColumnDamageCounterModAverage
+        {
+            get => _showColumnDamageCounterModAverage;
+            set => Set(ref _showColumnDamageCounterModAverage, value);
+        }
+
+        public bool ShowColumnDamageBlock
+        {
+            get => _showColumnDamageBlock;
+            set => Set(ref _showColumnDamageBlock, value);
+        }
+
+        public bool ShowColumnDamageBlockPercent
+        {
+            get => _showColumnDamageBlockPercent;
+            set => Set(ref _showColumnDamageBlockPercent, value);
+        }
+
+        public bool ShowColumnDamageBlockMod
+        {
+            get => _showColumnDamageBlockMod;
+            set => Set(ref _showColumnDamageBlockMod, value);
+        }
+
+        public bool ShowColumnDamageBlockModAverage
+        {
+            get => _showColumnDamageBlockModAverage;
+            set => Set(ref _showColumnDamageBlockModAverage, value);
+        }
+
+        public bool ShowColumnDamageParry
+        {
+            get => _showColumnDamageParry;
+            set => Set(ref _showColumnDamageParry, value);
+        }
+
+        public bool ShowColumnDamageParryPercent
+        {
+            get => _showColumnDamageParryPercent;
+            set => Set(ref _showColumnDamageParryPercent, value);
+        }
+
+        public bool ShowColumnDamageParryMod
+        {
+            get => _showColumnDamageParryMod;
+            set => Set(ref _showColumnDamageParryMod, value);
+        }
+
+        public bool ShowColumnDamageParryModAverage
+        {
+            get => _showColumnDamageParryModAverage;
+            set => Set(ref _showColumnDamageParryModAverage, value);
+        }
+
+        public bool ShowColumnDamageResist
+        {
+            get => _showColumnDamageResist;
+            set => Set(ref _showColumnDamageResist, value);
+        }
+
+        public bool ShowColumnDamageResistPercent
+        {
+            get => _showColumnDamageResistPercent;
+            set => Set(ref _showColumnDamageResistPercent, value);
+        }
+
+        public bool ShowColumnDamageResistMod
+        {
+            get => _showColumnDamageResistMod;
+            set => Set(ref _showColumnDamageResistMod, value);
+        }
+
+        public bool ShowColumnDamageResistModAverage
+        {
+            get => _showColumnDamageResistModAverage;
+            set => Set(ref _showColumnDamageResistModAverage, value);
+        }
+
+        public bool ShowColumnDamageEvade
+        {
+            get => _showColumnDamageEvade;
+            set => Set(ref _showColumnDamageEvade, value);
+        }
+
+        public bool ShowColumnDamageEvadePercent
+        {
+            get => _showColumnDamageEvadePercent;
+            set => Set(ref _showColumnDamageEvadePercent, value);
+        }
+
+        public bool ShowColumnDamageEvadeMod
+        {
+            get => _showColumnDamageEvadeMod;
+            set => Set(ref _showColumnDamageEvadeMod, value);
+        }
+
+        public bool ShowColumnDamageEvadeModAverage
+        {
+            get => _showColumnDamageEvadeModAverage;
+            set => Set(ref _showColumnDamageEvadeModAverage, value);
+        }
+
+        public bool ShowColumnPercentOfTotalOverallDamageTaken
+        {
+            get => _showColumnPercentOfTotalOverallDamageTaken;
+            set => Set(ref _showColumnPercentOfTotalOverallDamageTaken, value);
+        }
+
+        public bool ShowColumnPercentOfRegularDamageTaken
+        {
+            get => _showColumnPercentOfRegularDamageTaken;
+            set => Set(ref _showColumnPercentOfRegularDamageTaken, value);
+        }
+
+        public bool ShowColumnPercentOfCriticalDamageTaken
+        {
+            get => _showColumnPercentOfCriticalDamageTaken;
+            set => Set(ref _showColumnPercentOfCriticalDamageTaken, value);
+        }
+
+        public bool ShowColumnTotalDamageTakenActionsUsed
+        {
+            get => _showColumnTotalDamageTakenActionsUsed;
+            set => Set(ref _showColumnTotalDamageTakenActionsUsed, value);
+        }
+
+        public bool ShowColumnDamageTakenRegHit
+        {
+            get => _showColumnDamageTakenRegHit;
+            set => Set(ref _showColumnDamageTakenRegHit, value);
+        }
+
+        public bool ShowColumnDamageTakenRegMiss
+        {
+            get => _showColumnDamageTakenRegMiss;
+            set => Set(ref _showColumnDamageTakenRegMiss, value);
+        }
+
+        public bool ShowColumnDamageTakenRegAccuracy
+        {
+            get => _showColumnDamageTakenRegAccuracy;
+            set => Set(ref _showColumnDamageTakenRegAccuracy, value);
+        }
+
+        public bool ShowColumnDamageTakenCritHit
+        {
+            get => _showColumnDamageTakenCritHit;
+            set => Set(ref _showColumnDamageTakenCritHit, value);
+        }
+
+        public bool ShowColumnDamageTakenCritPercent
+        {
+            get => _showColumnDamageTakenCritPercent;
+            set => Set(ref _showColumnDamageTakenCritPercent, value);
+        }
+
+        public bool ShowColumnDamageTakenCounter
+        {
+            get => _showColumnDamageTakenCounter;
+            set => Set(ref _showColumnDamageTakenCounter, value);
+        }
+
+        public bool ShowColumnDamageTakenCounterPercent
+        {
+            get => _showColumnDamageTakenCounterPercent;
+            set => Set(ref _showColumnDamageTakenCounterPercent, value);
+        }
+
+        public bool ShowColumnDamageTakenCounterMod
+        {
+            get => _showColumnDamageTakenCounterMod;
+            set => Set(ref _showColumnDamageTakenCounterMod, value);
+        }
+
+        public bool ShowColumnDamageTakenCounterModAverage
+        {
+            get => _showColumnDamageTakenCounterModAverage;
+            set => Set(ref _showColumnDamageTakenCounterModAverage, value);
+        }
+
+        public bool ShowColumnDamageTakenBlock
+        {
+            get => _showColumnDamageTakenBlock;
+            set => Set(ref _showColumnDamageTakenBlock, value);
+        }
+
+        public bool ShowColumnDamageTakenBlockPercent
+        {
+            get => _showColumnDamageTakenBlockPercent;
+            set => Set(ref _showColumnDamageTakenBlockPercent, value);
+        }
+
+        public bool ShowColumnDamageTakenBlockMod
+        {
+            get => _showColumnDamageTakenBlockMod;
+            set => Set(ref _showColumnDamageTakenBlockMod, value);
+        }
+
+        public bool ShowColumnDamageTakenBlockModAverage
+        {
+            get => _showColumnDamageTakenBlockModAverage;
+            set => Set(ref _showColumnDamageTakenBlockModAverage, value);
+        }
+
+        public bool ShowColumnDamageTakenParry
+        {
+            get => _showColumnDamageTakenParry;
+            set => Set(ref _showColumnDamageTakenParry, value);
+        }
+
+        public bool ShowColumnDamageTakenParryPercent
+        {
+            get => _showColumnDamageTakenParryPercent;
+            set => Set(ref _showColumnDamageTakenParryPercent, value);
+        }
+
+        public bool ShowColumnDamageTakenParryMod
+        {
+            get => _showColumnDamageTakenParryMod;
+            set => Set(ref _showColumnDamageTakenParryMod, value);
+        }
+
+        public bool ShowColumnDamageTakenParryModAverage
+        {
+            get => _showColumnDamageTakenParryModAverage;
+            set => Set(ref _showColumnDamageTakenParryModAverage, value);
+        }
+
+        public bool ShowColumnDamageTakenResist
+        {
+            get => _showColumnDamageTakenResist;
+            set => Set(ref _showColumnDamageTakenResist, value);
+        }
+
+        public bool ShowColumnDamageTakenResistPercent
+        {
+            get => _showColumnDamageTakenResistPercent;
+            set => Set(ref _showColumnDamageTakenResistPercent, value);
+        }
+
+        public bool ShowColumnDamageTakenResistMod
+        {
+            get => _showColumnDamageTakenResistMod;
+            set => Set(ref _showColumnDamageTakenResistMod, value);
+        }
+
+        public bool ShowColumnDamageTakenResistModAverage
+        {
+            get => _showColumnDamageTakenResistModAverage;
+            set => Set(ref _showColumnDamageTakenResistModAverage, value);
+        }
+
+        public bool ShowColumnDamageTakenEvade
+        {
+            get => _showColumnDamageTakenEvade;
+            set => Set(ref _showColumnDamageTakenEvade, value);
+        }
+
+        public bool ShowColumnDamageTakenEvadePercent
+        {
+            get => _showColumnDamageTakenEvadePercent;
+            set => Set(ref _showColumnDamageTakenEvadePercent, value);
+        }
+
+        public bool ShowColumnDamageTakenEvadeMod
+        {
+            get => _showColumnDamageTakenEvadeMod;
+            set => Set(ref _showColumnDamageTakenEvadeMod, value);
+        }
+
+        public bool ShowColumnDamageTakenEvadeModAverage
+        {
+            get => _showColumnDamageTakenEvadeModAverage;
+            set => Set(ref _showColumnDamageTakenEvadeModAverage, value);
+        }
+
+        public bool ShowColumnPercentOfTotalOverallHealing
+        {
+            get => _showColumnPercentOfTotalOverallHealing;
+            set => Set(ref _showColumnPercentOfTotalOverallHealing, value);
+        }
+
+        public bool ShowColumnPercentOfRegularHealing
+        {
+            get => _showColumnPercentOfRegularHealing;
+            set => Set(ref _showColumnPercentOfRegularHealing, value);
+        }
+
+        public bool ShowColumnPercentOfCriticalHealing
+        {
+            get => _showColumnPercentOfCriticalHealing;
+            set => Set(ref _showColumnPercentOfCriticalHealing, value);
+        }
+
+        public bool ShowColumnTotalHealingActionsUsed
+        {
+            get => _showColumnTotalHealingActionsUsed;
+            set => Set(ref _showColumnTotalHealingActionsUsed, value);
+        }
+
+        public bool ShowColumnHealingRegHit
+        {
+            get => _showColumnHealingRegHit;
+            set => Set(ref _showColumnHealingRegHit, value);
+        }
+
+        public bool ShowColumnHealingCritHit
+        {
+            get => _showColumnHealingCritHit;
+            set => Set(ref _showColumnHealingCritHit, value);
+        }
+
+        public bool ShowColumnHealingCritPercent
+        {
+            get => _showColumnHealingCritPercent;
+            set => Set(ref _showColumnHealingCritPercent, value);
+        }
+
+        public bool ShowColumnPercentOfTotalOverallHealingMitigated
+        {
+            get => _showColumnPercentOfTotalOverallHealingMitigated;
+            set => Set(ref _showColumnPercentOfTotalOverallHealingMitigated, value);
+        }
+
+        public bool ShowColumnPercentOfRegularHealingMitigated
+        {
+            get => _showColumnPercentOfRegularHealingMitigated;
+            set => Set(ref _showColumnPercentOfRegularHealingMitigated, value);
+        }
+
+        public bool ShowColumnPercentOfCriticalHealingMitigated
+        {
+            get => _showColumnPercentOfCriticalHealingMitigated;
+            set => Set(ref _showColumnPercentOfCriticalHealingMitigated, value);
+        }
+
+        public bool ShowColumnTotalOverallHealingMitigated
+        {
+            get => _showColumnTotalOverallHealingMitigated;
+            set => Set(ref _showColumnTotalOverallHealingMitigated, value);
+        }
+
+        public bool ShowColumnRegularHealingMitigated
+        {
+            get => _showColumnRegularHealingMitigated;
+            set => Set(ref _showColumnRegularHealingMitigated, value);
+        }
+
+        public bool ShowColumnCriticalHealingMitigated
+        {
+            get => _showColumnCriticalHealingMitigated;
+            set => Set(ref _showColumnCriticalHealingMitigated, value);
+        }
+
+        public bool ShowColumnPercentOfTotalOverallHealingOverHealing
+        {
+            get => _showColumnPercentOfTotalOverallHealingOverHealing;
+            set => Set(ref _showColumnPercentOfTotalOverallHealingOverHealing, value);
+        }
+
+        public bool ShowColumnPercentOfRegularHealingOverHealing
+        {
+            get => _showColumnPercentOfRegularHealingOverHealing;
+            set => Set(ref _showColumnPercentOfRegularHealingOverHealing, value);
+        }
+
+        public bool ShowColumnPercentOfCriticalHealingOverHealing
+        {
+            get => _showColumnPercentOfCriticalHealingOverHealing;
+            set => Set(ref _showColumnPercentOfCriticalHealingOverHealing, value);
+        }
+
+        public bool ShowColumnTotalOverallHealingOverHealing
+        {
+            get => _showColumnTotalOverallHealingOverHealing;
+            set => Set(ref _showColumnTotalOverallHealingOverHealing, value);
+        }
+
+        public bool ShowColumnRegularHealingOverHealing
+        {
+            get => _showColumnRegularHealingOverHealing;
+            set => Set(ref _showColumnRegularHealingOverHealing, value);
+        }
+
+        public bool ShowColumnCriticalHealingOverHealing
+        {
+            get => _showColumnCriticalHealingOverHealing;
+            set => Set(ref _showColumnCriticalHealingOverHealing, value);
+        }
+
+        public bool ShowColumnPercentOfTotalOverallHealingOverTime
+        {
+            get => _showColumnPercentOfTotalOverallHealingOverTime;
+            set => Set(ref _showColumnPercentOfTotalOverallHealingOverTime, value);
+        }
+        
+        public bool ShowColumnPercentOfRegularHealingOverTime
+        {
+            get => _showColumnPercentOfRegularHealingOverTime;
+            set => Set(ref _showColumnPercentOfRegularHealingOverTime, value);
+        }
+        
+        public bool ShowColumnPercentOfCriticalHealingOverTime
+        {
+            get => _showColumnPercentOfCriticalHealingOverTime;
+            set => Set(ref _showColumnPercentOfCriticalHealingOverTime, value);
+        }
+        
+        public bool ShowColumnTotalOverallHealingOverTime
+        {
+            get => _showColumnTotalOverallHealingOverTime;
+            set => Set(ref _showColumnTotalOverallHealingOverTime, value);
+        }
+        
+        public bool ShowColumnRegularHealingOverTime
+        {
+            get => _showColumnRegularHealingOverTime;
+            set => Set(ref _showColumnRegularHealingOverTime, value);
+        }
+        
+        public bool ShowColumnCriticalHealingOverTime
+        {
+            get => _showColumnCriticalHealingOverTime;
+            set => Set(ref _showColumnCriticalHealingOverTime, value);
+        }
+
+        public bool ParseAdvanced
+        {
+            get => _parseAdvanced;
+            set => Set(ref _parseAdvanced, value);
+        }
+        
+        #endregion
+
+        #region fields
+        private bool _parseAdvanced;
+        private bool _showColumnPercentOfTotalOverallHealingOverTime;
+        private bool _showColumnPercentOfRegularHealingOverTime;
+        private bool _showColumnPercentOfCriticalHealingOverTime;
+        private bool _showColumnTotalOverallHealingOverTime;
+        private bool _showColumnRegularHealingOverTime;
+        private bool _showColumnCriticalHealingOverTime;
+        private bool _showColumnPercentOfTotalOverallHealingOverHealing;
+        private bool _showColumnPercentOfRegularHealingOverHealing;
+        private bool _showColumnPercentOfCriticalHealingOverHealing;
+        private bool _showColumnTotalOverallHealingOverHealing;
+        private bool _showColumnRegularHealingOverHealing;
+        private bool _showColumnCriticalHealingOverHealing;
+        private bool _showColumnHealingCritLow;
+        private bool _showColumnHealingCritHigh;
+        private bool _showColumnHealingCritAverage;
+        private bool _showColumnHealingCritMod;
+        private bool _showColumnHealingCritModAverage;
+        private bool _showColumnPercentOfTotalOverallHealingMitigated;
+        private bool _showColumnPercentOfRegularHealingMitigated;
+        private bool _showColumnPercentOfCriticalHealingMitigated;
+        private bool _showColumnTotalOverallHealingMitigated;
+        private bool _showColumnRegularHealingMitigated;
+        private bool _showColumnCriticalHealingMitigated;
+        private bool _showColumnPercentOfTotalOverallHealing;
+        private bool _showColumnPercentOfRegularHealing;
+        private bool _showColumnPercentOfCriticalHealing;
+        private bool _showColumnTotalHealingActionsUsed;
+        private bool _showColumnHealingRegHit;
+        private bool _showColumnHealingCritHit;
+        private bool _showColumnHealingCritPercent;
+        private bool _showColumnPercentOfTotalOverallDamageTaken;
+        private bool _showColumnPercentOfRegularDamageTaken;
+        private bool _showColumnPercentOfCriticalDamageTaken;
+        private bool _showColumnTotalDamageTakenActionsUsed;
+        private bool _showColumnDamageTakenRegHit;
+        private bool _showColumnDamageTakenRegMiss;
+        private bool _showColumnDamageTakenRegAccuracy;
+        private bool _showColumnDamageTakenCritHit;
+        private bool _showColumnDamageTakenCritPercent;
+        private bool _showColumnDamageTakenCounter;
+        private bool _showColumnDamageTakenCounterPercent;
+        private bool _showColumnDamageTakenCounterMod;
+        private bool _showColumnDamageTakenCounterModAverage;
+        private bool _showColumnDamageTakenBlock;
+        private bool _showColumnDamageTakenBlockPercent;
+        private bool _showColumnDamageTakenBlockMod;
+        private bool _showColumnDamageTakenBlockModAverage;
+        private bool _showColumnDamageTakenParry;
+        private bool _showColumnDamageTakenParryPercent;
+        private bool _showColumnDamageTakenParryMod;
+        private bool _showColumnDamageTakenParryModAverage;
+        private bool _showColumnDamageTakenResist;
+        private bool _showColumnDamageTakenResistPercent;
+        private bool _showColumnDamageTakenResistMod;
+        private bool _showColumnDamageTakenResistModAverage;
+        private bool _showColumnDamageTakenEvade;
+        private bool _showColumnDamageTakenEvadePercent;
+        private bool _showColumnDamageTakenEvadeMod;
+        private bool _showColumnDamageTakenEvadeModAverage;
+        private bool _showColumnPercentOfTotalOverallDamage;
+        private bool _showColumnPercentOfRegularDamage;
+        private bool _showColumnPercentOfCriticalDamage;
+        private bool _showColumnTotalOverallDamage;
+        private bool _showColumnRegularDamage;
+        private bool _showColumnCriticalDamage;
+        private bool _showColumnTotalDamageActionsUsed;
+        private bool _showColumnDPS;
+        private bool _showColumnDamageRegHit;
+        private bool _showColumnDamageRegMiss;
+        private bool _showColumnDamageRegAccuracy;
+        private bool _showColumnDamageRegLow;
+        private bool _showColumnDamageRegHigh;
+        private bool _showColumnDamageRegAverage;
+        private bool _showColumnDamageRegMod;
+        private bool _showColumnDamageRegModAverage;
+        private bool _showColumnDamageCritHit;
+        private bool _showColumnDamageCritPercent;
+        private bool _showColumnDamageCritLow;
+        private bool _showColumnDamageCritHigh;
+        private bool _showColumnDamageCritAverage;
+        private bool _showColumnDamageCritMod;
+        private bool _showColumnDamageCritModAverage;
+        private bool _showColumnDamageCounter;
+        private bool _showColumnDamageCounterPercent;
+        private bool _showColumnDamageCounterMod;
+        private bool _showColumnDamageCounterModAverage;
+        private bool _showColumnDamageBlock;
+        private bool _showColumnDamageBlockPercent;
+        private bool _showColumnDamageBlockMod;
+        private bool _showColumnDamageBlockModAverage;
+        private bool _showColumnDamageParry;
+        private bool _showColumnDamageParryPercent;
+        private bool _showColumnDamageParryMod;
+        private bool _showColumnDamageParryModAverage;
+        private bool _showColumnDamageResist;
+        private bool _showColumnDamageResistPercent;
+        private bool _showColumnDamageResistMod;
+        private bool _showColumnDamageResistModAverage;
+        private bool _showColumnDamageEvade;
+        private bool _showColumnDamageEvadePercent;
+        private bool _showColumnDamageEvadeMod;
+        private bool _showColumnDamageEvadeModAverage;
+        private bool _showColumnTotalOverallHealing;
+        private bool _showColumnRegularHealing;
+        private bool _showColumnCriticalHealing;
+        private bool _showColumnHPS;
+        private bool _showColumnHealingRegLow;
+        private bool _showColumnHealingRegHigh;
+        private bool _showColumnHealingRegAverage;
+        private bool _showColumnHealingRegMod;
+        private bool _showColumnHealingRegModAverage;
+        private bool _showColumnTotalOverallDamageTaken;
+        private bool _showColumnRegularDamageTaken;
+        private bool _showColumnCriticalDamageTaken;
+        private bool _showColumnDTPS;
+        private bool _showColumnDamageTakenRegLow;
+        private bool _showColumnDamageTakenRegHigh;
+        private bool _showColumnDamageTakenRegAverage;
+        private bool _showColumnDamageTakenRegMod;
+        private bool _showColumnDamageTakenRegModAverage;
+        private bool _showColumnDamageTakenCritLow;
+        private bool _showColumnDamageTakenCritHigh;
+        private bool _showColumnDamageTakenCritAverage;
+        private bool _showColumnDamageTakenCritMod;
+        private bool _showColumnDamageTakenCritModAverage;
+        private double _dpsVisibility;
+        private double _dtpsVisibility;
+        private double _hpsVisibility;
+        private string _dpsWidgetSortDirection;
+        private string _dpsWidgetSortProperty;
+        private string _dtpsWidgetSortDirection;
+        private string _dtpsWidgetSortProperty;
+        private string _hpsWidgetSortDirection;
+        private string _hpsWidgetSortProperty;
+        private bool _parseYou;
+        private bool _parseParty;
+        private bool _parseAlliance;
+        private bool _parseOther;
+        private bool _widgetClickThroughEnabled;
+        private bool _trackXPSFromParseStartEvent;
+        private bool _ignoreLimitBreaks;
+        private string _storeHistoryEvent;
+        private double _storeHistoryInterval;
+        private bool _enableStoreHistoryReset;
+        private bool _showDPSWidgetOnLoad;
+        private bool _showDTPSWidgetOnLoad;
+        private bool _showHPSWidgetOnLoad;
+        private string _dpsWidgetUIScale;
+        private int _dpsWidgetTop;
+        private int _dpsWidgetLeft;
+        private int _dpsWidgetHeight;
+        private int _dpsWidgetWidth;
+        private string _dtpsWidgetUIScale;
+        private int _dtpsWidgetTop;
+        private int _dtpsWidgetLeft;
+        private int _dtpsWidgetHeight;
+        private int _dtpsWidgetWidth;
+        private string _hpsWidgetUIScale;
+        private int _hpsWidgetTop;
+        private int _hpsWidgetLeft;
+        private int _hpsWidgetHeight;
+        private int _hpsWidgetWidth;
+        #endregion
+
+    }
+
+    /* TODO: Implement this
     internal class Settings : ApplicationSettingsBase, INotifyPropertyChanged {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -7618,4 +8807,5 @@ namespace FFXIVAPP.Plugin.Parse.Properties {
             }
         }
     }
+    */
 }

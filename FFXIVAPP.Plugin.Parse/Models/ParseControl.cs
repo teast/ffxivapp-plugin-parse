@@ -14,6 +14,7 @@ namespace FFXIVAPP.Plugin.Parse.Models {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
     using System.Timers;
 
     using FFXIVAPP.Common.Models;
@@ -279,7 +280,7 @@ namespace FFXIVAPP.Plugin.Parse.Models {
                 this.ParseEntityTimerProcessing = false;
                 return true;
             };
-            processor.BeginInvoke(delegate { }, processor);
+            Task.Run(() => processor);
         }
 
         private void RaisePropertyChanged([CallerMemberName] string caller = "") {

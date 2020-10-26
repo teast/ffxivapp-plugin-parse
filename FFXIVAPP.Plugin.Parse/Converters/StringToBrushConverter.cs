@@ -11,8 +11,6 @@
 namespace FFXIVAPP.Plugin.Parse.Converters {
     using System;
     using System.Globalization;
-    using System.Windows.Data;
-    using System.Windows.Media;
 
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
@@ -20,6 +18,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
 
     using NLog;
 
+    /* TODO: Implement this
     public class StringToBrushConverter : IValueConverter {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -94,4 +93,5 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
             }
         }
     }
+    */
 }

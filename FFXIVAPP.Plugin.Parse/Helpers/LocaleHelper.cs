@@ -14,7 +14,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
     using System.Globalization;
     using System.Linq;
     using System.Windows;
-
+    using Avalonia.Controls;
     using FFXIVAPP.Plugin.Parse.Localization;
 
     internal static class LocaleHelper {
@@ -50,7 +50,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                 dictionary = English.Context();
             }
 
-            return dictionary.Cast<DictionaryEntry>().ToDictionary(item => (string) item.Key, item => (string) item.Value);
+            return dictionary.ToDictionary(item => item.Key as string, item => item.Value as string);
         }
     }
 }

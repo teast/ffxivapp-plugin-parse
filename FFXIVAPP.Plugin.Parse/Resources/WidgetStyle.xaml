@@ -1,5 +1,6 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- TODO: Implement this, Style in Avalonia should be under Styles and not resource
     <Style x:Key="StatLabelStyle">
         <Setter Property="Control.Padding" Value="0" />
     </Style>
@@ -15,6 +16,7 @@
            BasedOn="{StaticResource StatLabelStyle}">
         <Setter Property="ContentControl.ContentStringFormat" Value="{}{0:F2}" />
     </Style>
+    -->
     <LinearGradientBrush x:Key="ProgressBarBackground" StartPoint="0,0" EndPoint="1,0">
         <GradientStop Offset="0" Color="#BABABA" />
         <GradientStop Offset="0.5" Color="#C7C7C7" />
@@ -48,24 +50,29 @@
         <GradientStop Offset="0.7" Color="#20000000" />
         <GradientStop Offset="1" Color="#0C000000" />
     </LinearGradientBrush>
-    <RadialGradientBrush x:Key="ProgressBarIndicatorLightingEffectLeft" RadiusX="1" RadiusY="1"
+    <!-- TODO: Implement this RadialGradientBrush
+    <RadialGradientBrush x:Key="ProgressBarIndicatorLightingEffectLeft" Radius="1" RadiusY="1"
                          RelativeTransform="1,0,0,1,0.5,0.5">
         <GradientStop Offset="0" Color="#60FFFFC4" />
         <GradientStop Offset="1" Color="#00FFFFC4" />
     </RadialGradientBrush>
+    -->
     <LinearGradientBrush x:Key="ProgressBarIndicatorLightingEffect" StartPoint="0,1" EndPoint="0,0">
         <GradientStop Offset="0" Color="#60FFFFC4" />
         <GradientStop Offset="1" Color="#00FFFFC4" />
     </LinearGradientBrush>
+    <!-- TODO: Implement this RadialGradientBrush
     <RadialGradientBrush x:Key="ProgressBarIndicatorLightingEffectRight" RadiusX="1" RadiusY="1"
                          RelativeTransform="1,0,0,1,-0.5,0.5">
         <GradientStop Offset="0" Color="#60FFFFC4" />
         <GradientStop Offset="1" Color="#00FFFFC4" />
     </RadialGradientBrush>
+    -->
     <LinearGradientBrush x:Key="ProgressBarIndicatorGlassyHighlight" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Offset="0.5385" Color="#90FFFFFF" />
         <GradientStop Offset="0.5385" Color="#00FFFFFF" />
     </LinearGradientBrush>
+<!-- TODO: Implement this, Style cannot be in resources
     <Style x:Key="ProgressBarStyleStopAnimation"
            TargetType="{x:Type ProgressBar}">
         <Setter Property="Foreground" Value="#01D328" />
@@ -153,6 +160,8 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="2" />
                     </Grid>
+-->
+                    <!-- TODO: Implement this Trigger in xaml...
                     <ControlTemplate.Triggers>
                         <Trigger Property="Orientation" Value="Vertical">
                             <Setter TargetName="TemplateRoot" Property="LayoutTransform">
@@ -172,14 +181,17 @@
                         <Trigger Property="IsIndeterminate" Value="false">
                             <Setter TargetName="Animation" Property="Background" Value="#80FFFFFF" />
                         </Trigger>
+                    </ControlTemplate.Triggers>
+                    -->
                         <!--
                             <Trigger Property="Value" Value="100">
                             <Setter Property="Visibility" TargetName="Animation" Value="Collapsed"/>
                             </Trigger>
                         -->
-                    </ControlTemplate.Triggers>
+    <!-- TODO: Implement this, Style cannot be in resources
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+    -->
 </ResourceDictionary>

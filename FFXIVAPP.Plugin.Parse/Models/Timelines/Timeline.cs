@@ -512,8 +512,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines {
 
         private void SetStoreHistoryInterval() {
             try {
-                double interval;
-                double.TryParse(Settings.Default.StoreHistoryInterval, out interval);
+                double interval = Settings.Default.StoreHistoryInterval;
                 this.StoreHistoryTimer.Interval = interval;
             }
             catch (Exception ex) {

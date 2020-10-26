@@ -11,8 +11,6 @@
 namespace FFXIVAPP.Plugin.Parse.Converters {
     using System;
     using System.Globalization;
-    using System.Windows;
-    using System.Windows.Data;
 
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
@@ -20,6 +18,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
 
     using NLog;
 
+    /* TODO: Implement this
     public class StringToVisibilityConverter : IValueConverter {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -92,4 +91,5 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
             throw new NotImplementedException();
         }
     }
+    */
 }

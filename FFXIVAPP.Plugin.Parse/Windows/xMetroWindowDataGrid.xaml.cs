@@ -11,9 +11,14 @@
 namespace FFXIVAPP.Plugin.Parse.Windows {
     using System.Collections.Generic;
     using System.Windows;
-
+    using Avalonia.Controls;
     using FFXIVAPP.Common.Helpers;
 
+    public class xMetroWindowDataGrid: Window
+    {
+        
+    }
+    /* TODO: Implement this
     using MahApps.Metro.Controls;
 
     /// <summary>
@@ -32,4 +37,5 @@ namespace FFXIVAPP.Plugin.Parse.Windows {
                 });
         }
     }
+    */
 }

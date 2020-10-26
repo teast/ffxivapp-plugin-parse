@@ -9,7 +9,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace FFXIVAPP.Plugin.Parse.Localization {
-    using System.Windows;
+    using Avalonia.Controls;
 
     public abstract class English {
         private static readonly ResourceDictionary Dictionary = new ResourceDictionary();

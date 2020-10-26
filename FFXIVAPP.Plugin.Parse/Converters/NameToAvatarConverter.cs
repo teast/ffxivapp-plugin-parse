@@ -17,9 +17,6 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
     using System.Text.RegularExpressions;
     using System.Threading;
     using System.Web;
-    using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Threading;
 
     using FFXIVAPP.Common;
     using FFXIVAPP.Common.Models;
@@ -32,6 +29,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
 
     using Constants = FFXIVAPP.Plugin.Parse.Constants;
 
+    /* TODO: Implement this
     public class NameToAvatarConverter : IMultiValueConverter {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -178,4 +176,5 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
             return null;
         }
     }
+    */
 }

@@ -8,26 +8,24 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace FFXIVAPP.Plugin.Parse {
+namespace FFXIVAPP.Plugin.Parse
+{
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ComponentModel.Composition;
     using System.Runtime.CompilerServices;
-    using System.Windows;
-    using System.Windows.Controls;
-
+    using Avalonia.Controls;
     using FFXIVAPP.Common.Events;
     using FFXIVAPP.Common.Helpers;
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
+    using FFXIVAPP.Common.WPF;
     using FFXIVAPP.IPluginInterface;
     using FFXIVAPP.Plugin.Parse.Helpers;
     using FFXIVAPP.Plugin.Parse.Properties;
 
     using NLog;
 
-    [Export(typeof(IPlugin))]
     public class Plugin : IPlugin, INotifyPropertyChanged {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -120,7 +118,6 @@ namespace FFXIVAPP.Plugin.Parse {
         public TabItem CreateTab() {
             this.Locale = LocaleHelper.Update(Constants.CultureInfo);
             var content = new ShellView();
-            content.Loaded += ShellViewModel.Loaded;
             var tabItem = new TabItem {
                 Header = this.Name,
                 Content = content

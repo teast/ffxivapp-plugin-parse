@@ -8,13 +8,21 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+
 namespace FFXIVAPP.Plugin.Parse.Controls {
     /// <summary>
     ///     Interaction logic for BasicCardSettings.xaml
     /// </summary>
-    public partial class BasicDisplaySettings {
+    public partial class BasicDisplaySettings: StackPanel {
         public BasicDisplaySettings() {
             this.InitializeComponent();
+        }
+
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

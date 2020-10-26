@@ -526,8 +526,11 @@ namespace FFXIVAPP.Plugin.Parse {
             }
         }
 
+        /* TODO: Implement this
+        AvaloniaUI, do have topmost support so we can probably just remove this
         public static void SetupWidgetTopMost() {
             WidgetTopMostHelper.HookWidgetTopMost();
         }
+        */
     }
 }

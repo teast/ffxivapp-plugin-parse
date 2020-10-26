@@ -13,9 +13,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Timers;
-    using System.Windows;
-    using System.Windows.Interop;
-    using System.Windows.Threading;
 
     using FFXIVAPP.Common.Helpers;
     using FFXIVAPP.Common.Models;
@@ -26,6 +23,8 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
 
     using NLog;
 
+        /* TODO: Implement this
+        AvaloniaUI, do have topmost support so we can probably just remove this
     public static class WidgetTopMostHelper {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -143,4 +142,5 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
             }
         }
     }
+    */
 }

@@ -12,9 +12,8 @@ namespace FFXIVAPP.Plugin.Parse.Interop {
     using System;
     using System.Runtime.InteropServices;
     using System.Text;
-    using System.Windows;
-    using System.Windows.Interop;
-
+    using Avalonia.Controls;
+    using Avalonia.Rendering;
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
     using FFXIVAPP.Plugin.Parse.Properties;
@@ -53,9 +52,11 @@ namespace FFXIVAPP.Plugin.Parse.Interop {
         [DllImport("user32.dll")]
         public static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc, WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
 
-        public static void ToggleClickThrough(Window window) {
+        public static void ToggleClickThrough(IRenderRoot visualRoot) {
             try {
-                IntPtr hWnd = new WindowInteropHelper(window).Handle;
+                IntPtr hWnd = ((Avalonia.Win32.WindowImpl)((TopLevel)visualRoot)?.PlatformImpl)?.Handle?.Handle ?? IntPtr.Zero;
+                if (hWnd == IntPtr.Zero)
+                    return;
                 if (Settings.Default.WidgetClickThroughEnabled) {
                     SetWindowTransparent(hWnd);
                 }

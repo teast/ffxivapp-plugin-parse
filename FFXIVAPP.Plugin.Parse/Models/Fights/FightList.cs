@@ -15,7 +15,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Fights {
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Windows.Threading;
 
     public sealed class FightList : ConcurrentStack<Fight>, INotifyPropertyChanged, INotifyCollectionChanged {
         /// <summary>
@@ -52,6 +51,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Fights {
         }
 
         private void DoCollectionChanged(NotifyCollectionChangedAction action, params Fight[] fights) {
+            /* TODO: Implement this
             Dispatcher dispatcher = null;
             foreach (Delegate @delegate in this.CollectionChanged.GetInvocationList()) {
                 var dispatcherObject = @delegate.Target as DispatcherObject;
@@ -69,6 +69,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Fights {
             else {
                 this.CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, fights));
             }
+            */
         }
 
         /// <summary>

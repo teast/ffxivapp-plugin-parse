@@ -1,5 +1,5 @@
 ﻿<DataGrid x:Class="FFXIVAPP.Plugin.Parse.Controls.DamageTakenOverTimeDataGrid"
-          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns="https://github.com/avaloniaui"
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:Converters="clr-namespace:FFXIVAPP.Common.Converters;assembly=FFXIVAPP.Common"
           xmlns:Parse="clr-namespace:FFXIVAPP.Plugin.Parse"
@@ -9,350 +9,279 @@
           xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
           AutoGenerateColumns="False"
           BorderBrush="{DynamicResource AccentColorBrush}"
-          BorderThickness="1"
-          VirtualizingStackPanel.VirtualizationMode="Recycling">
-    <DataGrid.Resources>
-        <Converters:VisibilityConverter x:Key="VisibilityConverter" />
-        <x:Static x:Key="PluginViewModel"
-                  Member="Parse:PluginViewModel.Instance" />
-        <x:Static x:Key="Settings"
-                  Member="PluginProperties:Settings.Default" />
-    </DataGrid.Resources>
+          BorderThickness="1">
+
     <DataGrid.ContextMenu>
         <ContextMenu>
+            <!-- TODO: Implement this, need checkable Context menu items...
             <MenuItem
                 Header="{Binding Locale[parse_PercentOfTotalOverallDamageTakenOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnPercentOfTotalOverallDamageTaken,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_PercentOfRegularDamageTakenOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnPercentOfRegularDamageTaken,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_PercentOfCriticalDamageTakenOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnPercentOfCriticalDamageTaken,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_TotalOverallDamageTakenOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnTotalOverallDamageTaken,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_RegularDamageTakenOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnRegularDamageTaken,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_CriticalDamageTakenOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnCriticalDamageTaken,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_TotalDamageTakenActionsUsedHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnTotalDamageTakenActionsUsed,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DTOTPSHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDTPS,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeRegHitHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenRegHit,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeRegMissHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenRegMiss,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeRegAccuracyHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenRegAccuracy,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeRegLowHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenRegLow,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeRegHighHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenRegHigh,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeRegAverageHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenRegAverage,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeRegModHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenRegMod,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeRegModAverageHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenRegModAverage,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeCritHitHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenCritHit,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeCritPercentHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenCritPercent,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeCritLowHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenCritLow,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeCritHighHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenCritHigh,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeCritAverageHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenCritAverage,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeCritModHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenCritMod,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
             <MenuItem
                 Header="{Binding Locale[parse_DamageTakenOverTimeCritModAverageHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                                       Source={x:Static Parse:PluginViewModel.Instance}}"
                 IsCheckable="True"
                 IsChecked="{Binding ShowColumnDamageTakenCritModAverage,
-                                          Source={StaticResource Settings}}" />
+                                          Source={x:Static PluginProperties:Settings.Default}}" />
+            -->
         </ContextMenu>
     </DataGrid.ContextMenu>
+    <!-- TODO: Implement this
     <i:Interaction.Behaviors>
         <behaviors:IgnoreMouseWheelBehavior />
     </i:Interaction.Behaviors>
+    -->
     <DataGrid.Columns>
         <!--  <DataGridTextColumn Header="Avatar" CellTemplate="{StaticResource avatarTemplate}" />  -->
+        <!-- TODO: Moved IsVisible to codebehind. verify that it works and remove this todo if so... -->
         <DataGridTextColumn Binding="{Binding Name}"
                             Header="{Binding Locale[parse_NameHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="Name" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="Name" />
         <DataGridTextColumn
             Binding="{Binding PercentOfTotalOverallDamageTakenOverTime,
                                               StringFormat=\{0:P2\}}"
             Header="{Binding Locale[parse_PercentOfTotalOverallDamageTakenOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="PercentOfTotalOverallDamageTakenOverTime"
-            Visibility="{Binding ShowColumnPercentOfTotalOverallDamageTaken,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="PercentOfTotalOverallDamageTakenOverTime" />
         <DataGridTextColumn
             Binding="{Binding PercentOfRegularDamageTakenOverTime,
                                               StringFormat=\{0:P2\}}"
             Header="{Binding Locale[parse_PercentOfRegularDamageTakenOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="PercentOfRegularDamageTakenOverTime"
-            Visibility="{Binding ShowColumnPercentOfRegularDamageTaken,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="PercentOfRegularDamageTakenOverTime" />
         <DataGridTextColumn
             Binding="{Binding PercentOfCriticalDamageTakenOverTime,
                                               StringFormat=\{0:P2\}}"
             Header="{Binding Locale[parse_PercentOfCriticalDamageTakenOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="PercentOfCriticalDamageTakenOverTime"
-            Visibility="{Binding ShowColumnPercentOfCriticalDamageTaken,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="PercentOfCriticalDamageTakenOverTime" />
         <DataGridTextColumn Binding="{Binding TotalOverallDamageTakenOverTime}"
                             Header="{Binding Locale[parse_TotalOverallDamageTakenOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="TotalOverallDamageTakenOverTime"
-                            Visibility="{Binding ShowColumnTotalOverallDamageTaken,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="TotalOverallDamageTakenOverTime" />
         <DataGridTextColumn Binding="{Binding RegularDamageTakenOverTime}"
                             Header="{Binding Locale[parse_RegularDamageTakenOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="RegularDamageTakenOverTime"
-                            Visibility="{Binding ShowColumnRegularDamageTaken,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="RegularDamageTakenOverTime" />
         <DataGridTextColumn Binding="{Binding CriticalDamageTakenOverTime}"
                             Header="{Binding Locale[parse_CriticalDamageTakenOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="CriticalDamageTakenOverTime"
-                            Visibility="{Binding ShowColumnCriticalDamageTaken,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="CriticalDamageTakenOverTime" />
         <DataGridTextColumn Binding="{Binding TotalDamageTakenOverTimeActionsUsed}"
                             Header="{Binding Locale[parse_TotalDamageTakenActionsUsedHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="TotalDamageTakenOverTimeActionsUsed"
-                            Visibility="{Binding ShowColumnTotalDamageTakenActionsUsed,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="TotalDamageTakenOverTimeActionsUsed" />
         <DataGridTextColumn
             Binding="{Binding DTOTPS,
                                               StringFormat=\{0:F2\}}"
             Header="{Binding Locale[parse_DTOTPSHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="DTOTPS"
-            Visibility="{Binding ShowColumnDTPS,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="DTOTPS" />
         <DataGridTextColumn Binding="{Binding DamageTakenOverTimeRegHit}"
                             Header="{Binding Locale[parse_DamageTakenOverTimeRegHitHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeRegHit"
-                            Visibility="{Binding ShowColumnDamageTakenRegHit,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="DamageTakenOverTimeRegHit" />
         <DataGridTextColumn Binding="{Binding DamageTakenOverTimeRegMiss}"
                             Header="{Binding Locale[parse_DamageTakenOverTimeRegMissHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeRegMiss"
-                            Visibility="{Binding ShowColumnDamageTakenRegMiss,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="DamageTakenOverTimeRegMiss" />
         <DataGridTextColumn
             Binding="{Binding DamageTakenOverTimeRegAccuracy,
                                               StringFormat=\{0:P2\}}"
             Header="{Binding Locale[parse_DamageTakenOverTimeRegAccuracyHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeRegAccuracy"
-            Visibility="{Binding ShowColumnDamageTakenRegAccuracy,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="DamageTakenOverTimeRegAccuracy" />
         <DataGridTextColumn Binding="{Binding DamageTakenOverTimeRegLow}"
                             Header="{Binding Locale[parse_DamageTakenOverTimeRegLowHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeRegLow"
-                            Visibility="{Binding ShowColumnDamageTakenRegLow,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="DamageTakenOverTimeRegLow" />
         <DataGridTextColumn Binding="{Binding DamageTakenOverTimeRegHigh}"
                             Header="{Binding Locale[parse_DamageTakenOverTimeRegHighHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeRegHigh"
-                            Visibility="{Binding ShowColumnDamageTakenRegHigh,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="DamageTakenOverTimeRegHigh" />
         <DataGridTextColumn
             Binding="{Binding DamageTakenOverTimeRegAverage,
                                               StringFormat=\{0:F2\}}"
             Header="{Binding Locale[parse_DamageTakenOverTimeRegAverageHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeRegAverage"
-            Visibility="{Binding ShowColumnDamageTakenRegAverage,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="DamageTakenOverTimeRegAverage" />
         <DataGridTextColumn
             Binding="{Binding DamageTakenOverTimeRegMod,
                                               StringFormat=\{0:F2\}}"
             Header="{Binding Locale[parse_DamageTakenOverTimeRegModHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeRegMod"
-            Visibility="{Binding ShowColumnDamageTakenRegMod,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="DamageTakenOverTimeRegMod" />
         <DataGridTextColumn
             Binding="{Binding DamageTakenOverTimeRegModAverage,
                                               StringFormat=\{0:F2\}}"
             Header="{Binding Locale[parse_DamageTakenOverTimeRegModAverageHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeRegModAverage"
-            Visibility="{Binding ShowColumnDamageTakenRegModAverage,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="DamageTakenOverTimeRegModAverage" />
         <DataGridTextColumn Binding="{Binding DamageTakenOverTimeCritHit}"
                             Header="{Binding Locale[parse_DamageTakenOverTimeCritHitHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeCritHit"
-                            Visibility="{Binding ShowColumnDamageTakenCritHit,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="DamageTakenOverTimeCritHit" />
         <DataGridTextColumn
             Binding="{Binding DamageTakenOverTimeCritPercent,
                                               StringFormat=\{0:P2\}}"
             Header="{Binding Locale[parse_DamageTakenOverTimeCritPercentHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeCritPercent"
-            Visibility="{Binding ShowColumnDamageTakenCritPercent,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="DamageTakenOverTimeCritPercent" />
         <DataGridTextColumn Binding="{Binding DamageTakenOverTimeCritLow}"
                             Header="{Binding Locale[parse_DamageTakenOverTimeCritLowHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeCritLow"
-                            Visibility="{Binding ShowColumnDamageTakenCritLow,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="DamageTakenOverTimeCritLow" />
         <DataGridTextColumn Binding="{Binding DamageTakenOverTimeCritHigh}"
                             Header="{Binding Locale[parse_DamageTakenOverTimeCritHighHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeCritHigh"
-                            Visibility="{Binding ShowColumnDamageTakenCritHigh,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+                            SortMemberPath="DamageTakenOverTimeCritHigh" />
         <DataGridTextColumn
             Binding="{Binding DamageTakenOverTimeCritAverage,
                                               StringFormat=\{0:F2\}}"
             Header="{Binding Locale[parse_DamageTakenOverTimeCritAverageHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeCritAverage"
-            Visibility="{Binding ShowColumnDamageTakenCritAverage,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="DamageTakenOverTimeCritAverage" />
         <DataGridTextColumn
             Binding="{Binding DamageTakenOverTimeCritMod,
                                               StringFormat=\{0:F2\}}"
             Header="{Binding Locale[parse_DamageTakenOverTimeCritModHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeCritMod"
-            Visibility="{Binding ShowColumnDamageTakenCritMod,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="DamageTakenOverTimeCritMod" />
         <DataGridTextColumn
             Binding="{Binding DamageTakenOverTimeCritModAverage,
                                               StringFormat=\{0:F2\}}"
             Header="{Binding Locale[parse_DamageTakenOverTimeCritModAverageHeader],
-                                             Source={StaticResource PluginViewModel}}"
-            Utilities:GridViewSort.PropertyName="DamageTakenOverTimeCritModAverage"
-            Visibility="{Binding ShowColumnDamageTakenCritModAverage,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+                                             Source={x:Static Parse:PluginViewModel.Instance}}"
+            SortMemberPath="DamageTakenOverTimeCritModAverage" />
     </DataGrid.Columns>
 </DataGrid>

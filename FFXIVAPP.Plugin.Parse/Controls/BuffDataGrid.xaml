@@ -1,5 +1,5 @@
 ﻿<DataGrid x:Class="FFXIVAPP.Plugin.Parse.Controls.BuffDataGrid"
-          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns="https://github.com/avaloniaui"
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:Models="clr-namespace:FFXIVAPP.Plugin.Parse.Models"
           xmlns:Parse="clr-namespace:FFXIVAPP.Plugin.Parse"
@@ -12,27 +12,24 @@
           BorderBrush="{DynamicResource AccentColorBrush}"
           BorderThickness="1">
 
-    <DataGrid.Resources>
-        <x:Static x:Key="PluginViewModel" Member="Parse:PluginViewModel.Instance" />
-        <x:Static x:Key="Settings" Member="PluginProperties:Settings.Default" />
-        <x:Static x:Key="Parser" Member="Models:ParseControl.Instance" />
-    </DataGrid.Resources>
+    <!-- TODO: Implement this
     <i:Interaction.Behaviors>
         <behaviors:IgnoreMouseWheelBehavior />
     </i:Interaction.Behaviors>
+    -->
     <DataGrid.Columns>
         <!--  <DataGridTextColumn Header="Avatar" CellTemplate="{StaticResource avatarTemplate}" />  -->
-        <DataGridTextColumn Utilities:GridViewSort.PropertyName="Name"
+        <DataGridTextColumn SortMemberPath="Name"
                             Binding="{Binding Name}"
-                            Header="{Binding Locale[parse_NameHeader], Source={StaticResource PluginViewModel}}" />
-        <DataGridTextColumn Utilities:GridViewSort.PropertyName="TotalBuffHours"
+                            Header="{Binding Locale[parse_NameHeader], Source={x:Static Parse:PluginViewModel.Instance}}" />
+        <DataGridTextColumn SortMemberPath="TotalBuffHours"
                             Binding="{Binding TotalBuffHours}"
-                            Header="{Binding Locale[parse_TimeHoursShortLabel], Source={StaticResource PluginViewModel}}" />
-        <DataGridTextColumn Utilities:GridViewSort.PropertyName="TotalBuffMinutes"
+                            Header="{Binding Locale[parse_TimeHoursShortLabel], Source={x:Static Parse:PluginViewModel.Instance}}" />
+        <DataGridTextColumn SortMemberPath="TotalBuffMinutes"
                             Binding="{Binding TotalBuffMinutes, StringFormat=\{0:00\}}"
-                            Header="{Binding Locale[parse_TimeMinutesShortLabel], Source={StaticResource PluginViewModel}}" />
-        <DataGridTextColumn Utilities:GridViewSort.PropertyName="TotalBuffSeconds"
+                            Header="{Binding Locale[parse_TimeMinutesShortLabel], Source={x:Static Parse:PluginViewModel.Instance}}" />
+        <DataGridTextColumn SortMemberPath="TotalBuffSeconds"
                             Binding="{Binding TotalBuffSeconds, StringFormat=\{0:00\}}"
-                            Header="{Binding Locale[parse_TimeSecondsShortLabel], Source={StaticResource PluginViewModel}}" />
+                            Header="{Binding Locale[parse_TimeSecondsShortLabel], Source={x:Static Parse:PluginViewModel.Instance}}" />
     </DataGrid.Columns>
 </DataGrid>

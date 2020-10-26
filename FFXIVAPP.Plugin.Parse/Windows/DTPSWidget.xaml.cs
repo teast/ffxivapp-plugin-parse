@@ -8,42 +8,63 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace FFXIVAPP.Plugin.Parse.Windows {
-    using System.ComponentModel;
-    using System.Windows;
-    using System.Windows.Input;
-
+namespace FFXIVAPP.Plugin.Parse.Windows
+{
+    using System.Runtime.InteropServices;
+    using Avalonia.Controls;
+    using Avalonia.Interactivity;
+    using Avalonia.Markup.Xaml;
     using FFXIVAPP.Plugin.Parse.Interop;
     using FFXIVAPP.Plugin.Parse.Properties;
 
     /// <summary>
     ///     Interaction logic for DTPSWidget.xaml
     /// </summary>
-    public partial class DTPSWidget {
+    public partial class DTPSWidget: Window {
         public static DTPSWidget View;
 
         public DTPSWidget() {
             View = this;
             this.InitializeComponent();
-            View.SourceInitialized += delegate {
-                WinAPI.ToggleClickThrough(this);
-            };
+            Party.DataContext = DTPSWidgetViewModel.Instance.ParseEntity.Players;
+            WidgetClose.Click += WidgetClose_OnClick;
         }
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                WinAPI.ToggleClickThrough(this.VisualRoot);
+        }
+
+        /* TODO: Implement this
         private void TitleBar_OnPreviewMouseDown(object sender, MouseButtonEventArgs e) {
             if (Mouse.LeftButton == MouseButtonState.Pressed) {
                 this.DragMove();
             }
         }
-
+        */
+        /* TODO: Implement this
         private void Widget_OnClosing(object sender, CancelEventArgs e) {
             e.Cancel = true;
             this.Hide();
         }
-
+        */
         private void WidgetClose_OnClick(object sender, RoutedEventArgs e) {
             Settings.Default.ShowDTPSWidgetOnLoad = false;
             this.Close();
         }
-    }
+ 
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
+            LayoutRoot = this.FindControl<Grid>("LayoutRoot");
+            WidgetClose = this.FindControl<Button>("WidgetClose");
+            Party = this.FindControl<ItemsControl>("Party");
+        }
+
+        public Grid LayoutRoot { get; private set; }
+        public Button WidgetClose { get; private set; }
+        public ItemsControl Party { get; private set; }
+   }
 }

@@ -8,13 +8,21 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+
 namespace FFXIVAPP.Plugin.Parse.Controls {
     /// <summary>
     ///     Interaction logic for PlayerInfoBox.xaml
     /// </summary>
-    public partial class PlayerInfoBox {
+    public partial class PlayerInfoBox: UserControl {
         public PlayerInfoBox() {
             this.InitializeComponent();
+        }
+        
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

@@ -8,19 +8,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace FFXIVAPP.Plugin.Parse {
+namespace FFXIVAPP.Plugin.Parse
+{
     using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using System.Windows;
-
+    using FFXIVAPP.Common.Utilities;
     using FFXIVAPP.Plugin.Parse.Interop;
     using FFXIVAPP.Plugin.Parse.Models;
     using FFXIVAPP.Plugin.Parse.Models.Events;
     using FFXIVAPP.Plugin.Parse.Properties;
-    using FFXIVAPP.Plugin.Parse.Windows;
+    using NLog;
 
     public sealed class ShellViewModel : INotifyPropertyChanged {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private static Lazy<ShellViewModel> _instance = new Lazy<ShellViewModel>(() => new ShellViewModel());
 
         public ShellViewModel() {
@@ -28,7 +29,6 @@ namespace FFXIVAPP.Plugin.Parse {
             Initializer.LoadPlayerRegEx();
             Initializer.LoadMonsterRegEx();
             Initializer.EnsureLogsDirectory();
-            Initializer.SetupWidgetTopMost();
             Settings.Default.PropertyChanged += DefaultOnPropertyChanged;
         }
 
@@ -38,10 +38,6 @@ namespace FFXIVAPP.Plugin.Parse {
             get {
                 return _instance.Value;
             }
-        }
-
-        internal static void Loaded(object sender, RoutedEventArgs e) {
-            ShellView.View.Loaded -= Loaded;
         }
 
         private static void DefaultOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
@@ -106,16 +102,19 @@ namespace FFXIVAPP.Plugin.Parse {
                         ListSortDirection direction = Settings.Default.DPSWidgetSortDirection == "Descending"
                                                           ? ListSortDirection.Descending
                                                           : ListSortDirection.Ascending;
+                        Logging.Log(Logger, $"TODO: Implement sorting for DPS widget direction: {direction}");
+                        /* TODO: Implement this sorting of DPS widget
                         var sortDescription = new SortDescription(Settings.Default.DPSWidgetSortProperty, direction);
                         DPSWidget.View.Party.Items.SortDescriptions.Clear();
                         DPSWidget.View.Party.Items.SortDescriptions.Add(sortDescription);
+                        */
                     }
                     catch (Exception) {
-                        DPSWidget.View.Party.Items.SortDescriptions.Clear();
-                        DPSWidget.View.Party.Items.SortDescriptions.Add(new SortDescription("DPS", ListSortDirection.Descending));
+                        //DPSWidget.View.Party.Items.SortDescriptions.Clear();
+                        //DPSWidget.View.Party.Items.SortDescriptions.Add(new SortDescription("DPS", ListSortDirection.Descending));
                     }
 
-                    DPSWidget.View.Party.Items.Refresh();
+                    //DPSWidget.View.Party.Items.Refresh();
                     break;
                 case "HPSWidgetSortDirection":
                 case "HPSWidgetSortProperty":
@@ -123,16 +122,19 @@ namespace FFXIVAPP.Plugin.Parse {
                         ListSortDirection direction = Settings.Default.HPSWidgetSortDirection == "Descending"
                                                           ? ListSortDirection.Descending
                                                           : ListSortDirection.Ascending;
+                        Logging.Log(Logger, $"TODO: Implement sorting for HPS widget direction: {direction}");
+                        /* TODO: Implement this sorting of HPS widget
                         var sortDescription = new SortDescription(Settings.Default.HPSWidgetSortProperty, direction);
                         HPSWidget.View.Party.Items.SortDescriptions.Clear();
                         HPSWidget.View.Party.Items.SortDescriptions.Add(sortDescription);
+                        */
                     }
                     catch (Exception) {
-                        HPSWidget.View.Party.Items.SortDescriptions.Clear();
-                        HPSWidget.View.Party.Items.SortDescriptions.Add(new SortDescription("HPS", ListSortDirection.Descending));
+                        //HPSWidget.View.Party.Items.SortDescriptions.Clear();
+                        //HPSWidget.View.Party.Items.SortDescriptions.Add(new SortDescription("HPS", ListSortDirection.Descending));
                     }
 
-                    HPSWidget.View.Party.Items.Refresh();
+                    //HPSWidget.View.Party.Items.Refresh();
                     break;
                 case "DTPSWidgetSortDirection":
                 case "DTPSWidgetSortProperty":
@@ -140,16 +142,19 @@ namespace FFXIVAPP.Plugin.Parse {
                         ListSortDirection direction = Settings.Default.DTPSWidgetSortDirection == "Descending"
                                                           ? ListSortDirection.Descending
                                                           : ListSortDirection.Ascending;
+                        Logging.Log(Logger, $"TODO: Implement sorting for DTPS widget direction: {direction}");
+                        /* TODO: Implement this sorting of DPS widget
                         var sortDescription = new SortDescription(Settings.Default.DTPSWidgetSortProperty, direction);
                         DTPSWidget.View.Party.Items.SortDescriptions.Clear();
                         DTPSWidget.View.Party.Items.SortDescriptions.Add(sortDescription);
+                        */
                     }
                     catch (Exception) {
-                        DTPSWidget.View.Party.Items.SortDescriptions.Clear();
-                        DTPSWidget.View.Party.Items.SortDescriptions.Add(new SortDescription("DTPS", ListSortDirection.Descending));
+                        //DTPSWidget.View.Party.Items.SortDescriptions.Clear();
+                        //DTPSWidget.View.Party.Items.SortDescriptions.Add(new SortDescription("DTPS", ListSortDirection.Descending));
                     }
 
-                    DTPSWidget.View.Party.Items.Refresh();
+                    //DTPSWidget.View.Party.Items.Refresh();
                     break;
             }
         }

@@ -11,12 +11,12 @@
 namespace FFXIVAPP.Plugin.Parse.Converters {
     using System;
     using System.Globalization;
-    using System.Windows.Data;
 
     using FFXIVAPP.ResourceFiles;
 
     using NLog;
 
+    /* TODO: Implement this
     public class JobToIconConverter : IValueConverter {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -36,4 +36,5 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
             throw new NotImplementedException();
         }
     }
+    */
 }

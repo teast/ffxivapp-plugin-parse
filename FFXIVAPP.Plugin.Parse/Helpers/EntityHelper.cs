@@ -72,24 +72,21 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                         try {
                             switch (parseType) {
                                 case ParseType.DPS:
-                                    double dps;
-                                    double.TryParse(Settings.Default.DPSVisibility, out dps);
+                                    double dps = Settings.Default.DPSVisibility;
                                     if (playerEntity.CombinedDPS <= dps) {
                                         continue;
                                     }
 
                                     break;
                                 case ParseType.DTPS:
-                                    double dtps;
-                                    double.TryParse(Settings.Default.DTPSVisibility, out dtps);
+                                    double dtps = Settings.Default.DTPSVisibility;
                                     if (playerEntity.CombinedDTPS <= dtps) {
                                         continue;
                                     }
 
                                     break;
                                 case ParseType.HPS:
-                                    double hps;
-                                    double.TryParse(Settings.Default.HPSVisibility, out hps);
+                                    double hps = Settings.Default.HPSVisibility;
                                     if (playerEntity.CombinedHPS <= hps) {
                                         continue;
                                     }

@@ -1,776 +1,771 @@
 ﻿<StackPanel x:Class="FFXIVAPP.Plugin.Parse.Controls.BasicCombinedDisplaySettings"
-            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns="https://github.com/avaloniaui"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+            xmlns:groupbox="clr-namespace:Teast.Controls;assembly=Teast.Controls.GroupBox"
             xmlns:Parse="clr-namespace:FFXIVAPP.Plugin.Parse"
             xmlns:PluginProperties="clr-namespace:FFXIVAPP.Plugin.Parse.Properties">
 
-    <StackPanel.Resources>
-        <x:Static x:Key="Settings" Member="PluginProperties:Settings.Default" />
-        <x:Static x:Key="PluginViewModel" Member="Parse:PluginViewModel.Instance" />
-    </StackPanel.Resources>
-
-    <Expander Header="{Binding Locale[parse_StatsTotalsOverallLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsTotalsOverallLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedTotalOverallDamageInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedTotalOverallDamageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedTotalOverallDamage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedTotalOverallDamage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedTotalOverallHealingInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedTotalOverallHealingInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedTotalOverallHealing, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedTotalOverallHealing, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedTotalOverallDamageTakenInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedTotalOverallDamageTakenInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedTotalOverallDamageTaken, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedTotalOverallDamageTaken, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsTotalsActionsUsedLabel], Source={StaticResource PluginViewModel}}"
-              Visibility="Collapsed">
+    <Expander Header="{Binding Locale[parse_StatsTotalsActionsUsedLabel], Source={x:Static Parse:PluginViewModel.Instance}}"
+              IsVisible="False">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedTotalDamageActionsUsedInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedTotalDamageActionsUsedInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedTotalDamageActionsUsed, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedTotalDamageActionsUsed, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedTotalHealingActionsUsedInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedTotalHealingActionsUsedInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedTotalHealingActionsUsed, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedTotalHealingActionsUsed, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedTotalDamageTakenActionsUsedInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedTotalDamageTakenActionsUsedInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedTotalDamageTakenActionsUsed, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedTotalDamageTakenActionsUsed, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsPerSecondLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsPerSecondLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDPSInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDPSInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDPS, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDPS, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHPSInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHPSInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHPS, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHPS, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDTPSInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDTPSInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDTPS, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDTPS, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsDamageRegularLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsDamageRegularLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedRegularDamageInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedRegularDamageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedRegularDamage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedRegularDamage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageRegHitInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageRegHitInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageRegHit, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageRegHit, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageRegMissInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageRegMissInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageRegMiss, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageRegMiss, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageRegAccuracyInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageRegAccuracyInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageRegAccuracy, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageRegAccuracy, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageRegLowInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageRegLowInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageRegLow, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageRegLow, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageRegHighInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageRegHighInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageRegHigh, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageRegHigh, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageRegAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageRegAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageRegAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageRegAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageRegModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageRegModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageRegMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageRegMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageRegModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageRegModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageRegModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageRegModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsDamageCriticalLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsDamageCriticalLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedCriticalDamageInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedCriticalDamageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedCriticalDamage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedCriticalDamage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCritHitInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCritHitInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCritHit, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCritHit, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCritPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCritPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCritPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCritPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCritLowInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCritLowInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCritLow, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCritLow, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCritHighInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCritHighInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCritHigh, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCritHigh, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCritAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCritAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCritAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCritAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCritModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCritModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCritMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCritMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCritModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCritModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCritModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCritModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsDamageExtendedLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsDamageExtendedLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCounterInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCounterInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCounter, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCounter, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCounterPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCounterPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCounterPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCounterPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCounterModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCounterModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCounterMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCounterMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageCounterModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageCounterModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageCounterModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageCounterModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageBlockInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageBlockInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageBlock, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageBlock, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageBlockPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageBlockPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageBlockPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageBlockPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageBlockModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageBlockModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageBlockMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageBlockMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageBlockModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageBlockModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageBlockModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageBlockModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageParryInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageParryInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageParry, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageParry, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageParryPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageParryPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageParryPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageParryPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageParryModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageParryModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageParryMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageParryMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageParryModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageParryModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageParryModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageParryModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageResistInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageResistInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageResist, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageResist, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageResistPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageResistPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageResistPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageResistPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageResistModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageResistModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageResistMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageResistMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageResistModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageResistModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageResistModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageResistModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageEvadeInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageEvadeInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageEvade, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageEvade, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageEvadePercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageEvadePercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageEvadePercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageEvadePercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageEvadeModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageEvadeModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageEvadeMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageEvadeMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageEvadeModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageEvadeModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageEvadeModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageEvadeModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsHealingRegularLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsHealingRegularLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedRegularHealingInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedRegularHealingInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedRegularHealing, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedRegularHealing, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingRegHitInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingRegHitInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingRegHit, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingRegHit, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingRegLowInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingRegLowInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingRegLow, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingRegLow, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingRegHighInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingRegHighInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingRegHigh, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingRegHigh, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingRegAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingRegAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingRegAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingRegAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingRegModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingRegModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingRegMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingRegMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingRegModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingRegModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingRegModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingRegModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsHealingCriticalLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsHealingCriticalLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedCriticalHealingInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedCriticalHealingInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedCriticalHealing, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedCriticalHealing, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingCritHitInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingCritHitInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingCritHit, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingCritHit, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingCritPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingCritPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingCritPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingCritPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingCritLowInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingCritLowInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingCritLow, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingCritLow, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingCritHighInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingCritHighInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingCritHigh, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingCritHigh, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingCritAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingCritAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingCritAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingCritAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingCritModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingCritModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingCritMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingCritMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedHealingCritModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedHealingCritModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedHealingCritModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedHealingCritModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsHealing:ExtendedLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsHealing:ExtendedLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <TextBlock Text="{Binding Locale[app_ComingSoonText], Source={StaticResource PluginViewModel}}"
+            <TextBlock Text="{Binding Locale[app_ComingSoonText], Source={x:Static Parse:PluginViewModel.Instance}}"
                        TextWrapping="WrapWithOverflow" />
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsDamageTakenRegularLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsDamageTakenRegularLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedRegularDamageTakenInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedRegularDamageTakenInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedRegularDamageTaken, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedRegularDamageTaken, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegHitInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegHitInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegHit, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegHit, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegMissInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegMissInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegMiss, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegMiss, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegAccuracyInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegAccuracyInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegAccuracy, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegAccuracy, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegLowInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegLowInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegLow, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegLow, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegHighInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegHighInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegHigh, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegHigh, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenRegModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenRegModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsDamageTakenCriticalLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsDamageTakenCriticalLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedCriticalDamageTakenInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedCriticalDamageTakenInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedCriticalDamageTaken, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedCriticalDamageTaken, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritHitInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritHitInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritHit, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritHit, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritLowInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritLowInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritLow, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritLow, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritHighInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritHighInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritHigh, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritHigh, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCritModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCritModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 
-    <Expander Header="{Binding Locale[parse_StatsDamageTakenExtendedLabel], Source={StaticResource PluginViewModel}}">
+    <Expander Header="{Binding Locale[parse_StatsDamageTakenExtendedLabel], Source={x:Static Parse:PluginViewModel.Instance}}">
         <StackPanel>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCounterInfoHeader], Source={StaticResource PluginViewModel}}">
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCounterInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCounter, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCounter, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCounterPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCounterPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCounterPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCounterPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCounterModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCounterModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCounterMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCounterMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenCounterModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenCounterModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenCounterModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenCounterModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenBlockInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenBlockInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenBlock, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenBlock, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenBlockPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenBlockPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenBlockPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenBlockPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenBlockModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenBlockModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenBlockMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenBlockMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenBlockModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenBlockModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenBlockModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenBlockModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenParryInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenParryInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenParry, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenParry, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenParryPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenParryPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenParryPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenParryPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenParryModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenParryModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenParryMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenParryMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenParryModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenParryModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenParryModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenParryModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenResistInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenResistInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenResist, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenResist, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenResistPercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenResistPercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenResistPercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenResistPercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenResistModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenResistModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenResistMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenResistMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenResistModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenResistModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenResistModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenResistModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenEvadeInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenEvadeInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenEvade, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenEvade, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenEvadePercentInfoHeader], Source={StaticResource PluginViewModel}}"
-                Visibility="Collapsed">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenEvadePercentInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}"
+                IsVisible="False">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenEvadePercent, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenEvadePercent, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenEvadeModInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenEvadeModInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenEvadeMod, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenEvadeMod, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
-            <GroupBox
-                Header="{Binding Locale[parse_ShowCombinedDamageTakenEvadeModAverageInfoHeader], Source={StaticResource PluginViewModel}}">
+            </groupbox:GroupBox>
+            <groupbox:GroupBox
+                Header="{Binding Locale[parse_ShowCombinedDamageTakenEvadeModAverageInfoHeader], Source={x:Static Parse:PluginViewModel.Instance}}">
                 <StackPanel>
-                    <MetroControls:ToggleSwitch
-                        IsChecked="{Binding ShowBasicCombinedDamageTakenEvadeModAverage, Source={StaticResource Settings}}" />
+                    <ToggleSwitch
+                        IsChecked="{Binding ShowBasicCombinedDamageTakenEvadeModAverage, Source={x:Static PluginProperties:Settings.Default}}" />
                 </StackPanel>
-            </GroupBox>
+            </groupbox:GroupBox>
         </StackPanel>
     </Expander>
 </StackPanel>

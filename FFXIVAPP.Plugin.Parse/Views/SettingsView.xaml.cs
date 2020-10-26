@@ -8,16 +8,24 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+
 namespace FFXIVAPP.Plugin.Parse.Views {
     /// <summary>
     ///     Interaction logic for SettingsView.xaml
     /// </summary>
-    public partial class SettingsView {
+    public partial class SettingsView: UserControl {
         public static SettingsView View;
 
         public SettingsView() {
             this.InitializeComponent();
             View = this;
+        }
+
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

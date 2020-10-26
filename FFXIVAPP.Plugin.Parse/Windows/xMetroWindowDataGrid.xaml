@@ -1,5 +1,11 @@
-﻿<MetroControls:MetroWindow x:Class="FFXIVAPP.Plugin.Parse.Windows.xMetroWindowDataGrid"
-                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="FFXIVAPP.Plugin.Parse.Windows.xMetroWindowDataGrid">
+</Window>
+<!-- TODO: Implement this
+<MetroControls:MetroWindow x:Class="FFXIVAPP.Plugin.Parse.Windows.xMetroWindowDataGrid"
+                           xmlns="https://github.com/avaloniaui"
                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                            xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                            xmlns:Plugin="clr-namespace:FFXIVAPP.Plugin.Parse"
@@ -23,8 +29,6 @@
                 <ResourceDictionary
                     Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <x:Static x:Key="PluginViewModel"
-                      Member="Plugin:PluginViewModel.Instance" />
         </ResourceDictionary>
     </MetroControls:MetroWindow.Resources>
 
@@ -37,9 +41,9 @@
             <Grid.LayoutTransform>
                 <ScaleTransform
                     ScaleX="{Binding UIScale,
-                                                 Source={StaticResource PluginViewModel}}"
+                                                 Source={x:Static Parse:PluginViewModel.Instance}}"
                     ScaleY="{Binding UIScale,
-                                                 Source={StaticResource PluginViewModel}}" />
+                                                 Source={x:Static Parse:PluginViewModel.Instance}}" />
             </Grid.LayoutTransform>
             <DataGrid x:Name="xMetroWindowDG"
                       AutoGenerateColumns="True"
@@ -53,3 +57,4 @@
         </Grid>
     </MetroControls:MetroContentControl>
 </MetroControls:MetroWindow>
+-->

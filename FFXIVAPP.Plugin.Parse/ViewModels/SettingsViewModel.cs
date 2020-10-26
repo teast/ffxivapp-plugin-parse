@@ -65,36 +65,36 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
         }
 
         public void ResetDPSWidget() {
-            Settings.Default.DPSWidgetUIScale = Settings.Default.Properties["DPSWidgetUIScale"].DefaultValue.ToString();
-            Settings.Default.DPSWidgetTop = int.Parse(Settings.Default.Properties["DPSWidgetTop"].DefaultValue.ToString());
-            Settings.Default.DPSWidgetLeft = int.Parse(Settings.Default.Properties["DPSWidgetLeft"].DefaultValue.ToString());
-            Settings.Default.DPSWidgetHeight = int.Parse(Settings.Default.Properties["DPSWidgetHeight"].DefaultValue.ToString());
-            Settings.Default.DPSWidgetWidth = int.Parse(Settings.Default.Properties["DPSWidgetWidth"].DefaultValue.ToString());
-            Settings.Default.DPSVisibility = Settings.Default.Properties["DPSVisibility"].DefaultValue.ToString();
-            Settings.Default.DPSWidgetSortDirection = Settings.Default.Properties["DPSWidgetSortDirection"].DefaultValue.ToString();
-            Settings.Default.DPSWidgetSortProperty = Settings.Default.Properties["DPSWidgetSortProperty"].DefaultValue.ToString();
+            Settings.Default.DPSWidgetUIScale = Settings.Default.Properties.DPSWidgetUIScale;
+            Settings.Default.DPSWidgetTop = Settings.Default.Properties.DPSWidgetTop;
+            Settings.Default.DPSWidgetLeft = Settings.Default.Properties.DPSWidgetLeft;
+            Settings.Default.DPSWidgetHeight = Settings.Default.Properties.DPSWidgetHeight;
+            Settings.Default.DPSWidgetWidth = Settings.Default.Properties.DPSWidgetWidth;
+            Settings.Default.DPSVisibility = Settings.Default.Properties.DPSVisibility;
+            Settings.Default.DPSWidgetSortDirection = Settings.Default.Properties.DPSWidgetSortDirection;
+            Settings.Default.DPSWidgetSortProperty = Settings.Default.Properties.DPSWidgetSortProperty;
         }
 
         public void ResetDTPSWidget() {
-            Settings.Default.DTPSWidgetUIScale = Settings.Default.Properties["DTPSWidgetUIScale"].DefaultValue.ToString();
-            Settings.Default.DTPSWidgetTop = int.Parse(Settings.Default.Properties["DTPSWidgetTop"].DefaultValue.ToString());
-            Settings.Default.DTPSWidgetLeft = int.Parse(Settings.Default.Properties["DTPSWidgetLeft"].DefaultValue.ToString());
-            Settings.Default.DTPSWidgetHeight = int.Parse(Settings.Default.Properties["DTPSWidgetHeight"].DefaultValue.ToString());
-            Settings.Default.DTPSWidgetWidth = int.Parse(Settings.Default.Properties["DTPSWidgetWidth"].DefaultValue.ToString());
-            Settings.Default.DTPSVisibility = Settings.Default.Properties["DTPSVisibility"].DefaultValue.ToString();
-            Settings.Default.DTPSWidgetSortDirection = Settings.Default.Properties["DTPSWidgetSortDirection"].DefaultValue.ToString();
-            Settings.Default.DTPSWidgetSortProperty = Settings.Default.Properties["DTPSWidgetSortProperty"].DefaultValue.ToString();
+            Settings.Default.DTPSWidgetUIScale = Settings.Default.Properties.DTPSWidgetUIScale;
+            Settings.Default.DTPSWidgetTop = Settings.Default.Properties.DTPSWidgetTop;
+            Settings.Default.DTPSWidgetLeft = Settings.Default.Properties.DTPSWidgetLeft;
+            Settings.Default.DTPSWidgetHeight = Settings.Default.Properties.DTPSWidgetHeight;
+            Settings.Default.DTPSWidgetWidth = Settings.Default.Properties.DTPSWidgetWidth;
+            Settings.Default.DTPSVisibility = Settings.Default.Properties.DTPSVisibility;
+            Settings.Default.DTPSWidgetSortDirection = Settings.Default.Properties.DTPSWidgetSortDirection;
+            Settings.Default.DTPSWidgetSortProperty = Settings.Default.Properties.DTPSWidgetSortProperty;
         }
 
         public void ResetHPSWidget() {
-            Settings.Default.HPSWidgetUIScale = Settings.Default.Properties["HPSWidgetUIScale"].DefaultValue.ToString();
-            Settings.Default.HPSWidgetTop = int.Parse(Settings.Default.Properties["HPSWidgetTop"].DefaultValue.ToString());
-            Settings.Default.HPSWidgetLeft = int.Parse(Settings.Default.Properties["HPSWidgetLeft"].DefaultValue.ToString());
-            Settings.Default.HPSWidgetHeight = int.Parse(Settings.Default.Properties["HPSWidgetHeight"].DefaultValue.ToString());
-            Settings.Default.HPSWidgetWidth = int.Parse(Settings.Default.Properties["HPSWidgetWidth"].DefaultValue.ToString());
-            Settings.Default.HPSVisibility = Settings.Default.Properties["HPSVisibility"].DefaultValue.ToString();
-            Settings.Default.HPSWidgetSortDirection = Settings.Default.Properties["HPSWidgetSortDirection"].DefaultValue.ToString();
-            Settings.Default.HPSWidgetSortProperty = Settings.Default.Properties["HPSWidgetSortProperty"].DefaultValue.ToString();
+            Settings.Default.HPSWidgetUIScale = Settings.Default.Properties.HPSWidgetUIScale;
+            Settings.Default.HPSWidgetTop = Settings.Default.Properties.HPSWidgetTop;
+            Settings.Default.HPSWidgetLeft = Settings.Default.Properties.HPSWidgetLeft;
+            Settings.Default.HPSWidgetHeight = Settings.Default.Properties.HPSWidgetHeight;
+            Settings.Default.HPSWidgetWidth = Settings.Default.Properties.HPSWidgetWidth;
+            Settings.Default.HPSVisibility = Settings.Default.Properties.HPSVisibility;
+            Settings.Default.HPSWidgetSortDirection = Settings.Default.Properties.HPSWidgetSortDirection;
+            Settings.Default.HPSWidgetSortProperty = Settings.Default.Properties.HPSWidgetSortProperty;
         }
 
         private void RaisePropertyChanged([CallerMemberName] string caller = "") {
