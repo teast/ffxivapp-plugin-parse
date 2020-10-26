@@ -19,7 +19,7 @@ namespace FFXIVAPP.Plugin.Parse {
     using FFXIVAPP.Common.Helpers;
 
     public static class Constants {
-        public const string LibraryPack = "pack://application:,,,/FFXIVAPP.Plugin.Parse;component/";
+        public const string LibraryPack = "FFXIVAPP.Plugin.Parse";
 
         public static readonly List<string> Abilities = new List<string> {
             "142B",
@@ -157,10 +157,10 @@ namespace FFXIVAPP.Plugin.Parse {
                     var found = File.Exists(file);
                     _xRegEx = found
                                   ? XDocument.Load(file)
-                                  : ResourceHelper.XDocResource(LibraryPack + "/Defaults/RegularExpressions.xml");
+                                  : ResourceHelper.XDocResource(LibraryPack + ".Defaults.RegularExpressions.xml");
                 }
                 catch (Exception) {
-                    _xRegEx = ResourceHelper.XDocResource(LibraryPack + "/Defaults/RegularExpressions.xml");
+                    _xRegEx = ResourceHelper.XDocResource(LibraryPack + ".Defaults.RegularExpressions.xml");
                 }
 
                 return _xRegEx;
@@ -188,11 +188,11 @@ namespace FFXIVAPP.Plugin.Parse {
                         found = File.Exists(legacyFile);
                         _xSettings = found
                                          ? XDocument.Load(legacyFile)
-                                         : ResourceHelper.XDocResource(LibraryPack + "/Defaults/Settings.xml");
+                                         : ResourceHelper.XDocResource(LibraryPack + ".Defaults.Settings.xml");
                     }
                 }
                 catch (Exception) {
-                    _xSettings = ResourceHelper.XDocResource(LibraryPack + "/Defaults/Settings.xml");
+                    _xSettings = ResourceHelper.XDocResource(LibraryPack + ".Defaults.Settings.xml");
                 }
 
                 return _xSettings;

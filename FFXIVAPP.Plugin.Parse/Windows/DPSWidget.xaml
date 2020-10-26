@@ -10,34 +10,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Parse="clr-namespace:FFXIVAPP.Plugin.Parse"
         Title="DPSWidget"
-        Width="{Binding DPSWidgetWidth,
-                        Source={x:Static PluginProperties:Settings.Default},
-                        Mode=TwoWay}"
-        Height="{Binding DPSWidgetHeight,
-                         Source={x:Static PluginProperties:Settings.Default},
-                         Mode=TwoWay}"
         MinWidth="200"
-        MinHeight="360"
-        MaxWidth="375"
-        MaxHeight="600"
-        Background="Transparent"
-        Opacity="{Binding WidgetOpacity,
-                          Source={x:Static PluginProperties:Settings.Default}}"
+        SizeToContent="WidthAndHeight"
+        TransparencyLevelHint="Transparent"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="40"
+        HasSystemDecorations="True"
+        SystemDecorations="BorderOnly"
+        Background="#00000000"
+        Topmost="True"
         ShowInTaskbar="False">
 
-<!-- TODO Implement this
-        WindowStyle="None"
-        Left="{Binding DPSWidgetLeft,
-                       Mode=TwoWay,
-                       Source={x:Static PluginProperties:Settings.Default}}"
-        Top="{Binding DPSWidgetTop,
-                      Mode=TwoWay,
-                      Source={x:Static PluginProperties:Settings.Default}}"
-        ResizeMode="NoResize"
--->                      
     <Window.Resources>
-        <ResourceDictionary>
+        <converters:OpacityToColorConverter x:Key="OpacityToColorConverter" />
+        <SolidColorBrush x:Key="WhiteSmoke" Color="{Binding WidgetOpacity, 
+                        Source={x:Static PluginProperties:Settings.Default},
+                        Converter={StaticResource OpacityToColorConverter}}" />
             <!-- TODO: Implement this
+        <ResourceDictionary>
             <converters:StringToBrushConverter x:Key="StringToBrushConverter" />
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
             -->
@@ -46,8 +37,8 @@
                 <ResourceDictionary
                     Source="pack://application:,,,/FFXIVAPP.Plugin.Parse;component/Resources/WidgetStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            -->
         </ResourceDictionary>
+            -->
     </Window.Resources>
 
     <Grid x:Name="LayoutRoot">
@@ -64,10 +55,9 @@
             <DockPanel LastChildFill="True"
                        IsVisible="{Binding ShowTitlesOnWidgets,
                                             Source={x:Static PluginProperties:Settings.Default}}">
-                <Border Margin="5 0 5 5"
-                        Background="WhiteSmoke"
-                        BorderBrush="Black"
+                <Border BorderBrush="Black"
                         BorderThickness="1"
+                        Background="{StaticResource WhiteSmoke}"
                         CornerRadius="2">
                     <DockPanel LastChildFill="True">
                         <Button x:Name="WidgetClose"
@@ -81,8 +71,7 @@
                                   Stretch="None"
                                   Stroke="Black" />
                         </Button>
-                        <!-- TODO: This is "titlebar" that should move the window-->
-                        <DockPanel Background="WhiteSmoke">
+                        <DockPanel x:Name="Titlebar" Background="{StaticResource WhiteSmoke}">
                             <Grid>
                                 <TextBlock Grid.Row="0"
                                            Margin="5 -1"
@@ -129,7 +118,7 @@
                                 <Border Grid.Row="1"
                                         Margin="5 0"
                                         VerticalAlignment="Bottom"
-                                        Background="WhiteSmoke"
+                                        Background="{StaticResource WhiteSmoke}"
                                         BorderBrush="Black"
                                         BorderThickness="1"
                                         CornerRadius="2">

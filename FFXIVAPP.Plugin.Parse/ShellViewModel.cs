@@ -25,10 +25,11 @@ namespace FFXIVAPP.Plugin.Parse
         private static Lazy<ShellViewModel> _instance = new Lazy<ShellViewModel>(() => new ShellViewModel());
 
         public ShellViewModel() {
-            Initializer.LoadSettings();
+            // TODO: Moved this to Settings constructor... verify and remove this comment! Initializer.LoadSettings();
             Initializer.LoadPlayerRegEx();
             Initializer.LoadMonsterRegEx();
             Initializer.EnsureLogsDirectory();
+            Initializer.ShowWidgets();
             Settings.Default.PropertyChanged += DefaultOnPropertyChanged;
         }
 

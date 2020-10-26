@@ -526,11 +526,13 @@ namespace FFXIVAPP.Plugin.Parse {
             }
         }
 
-        /* TODO: Implement this
-        AvaloniaUI, do have topmost support so we can probably just remove this
-        public static void SetupWidgetTopMost() {
-            WidgetTopMostHelper.HookWidgetTopMost();
+        public static void ShowWidgets() {
+            if (Settings.Default.ShowDPSWidgetOnLoad)
+                Widgets.Instance.ShowDPSWidget();
+            if (Settings.Default.ShowDTPSWidgetOnLoad)
+                Widgets.Instance.ShowDTPSWidget();
+            if (Settings.Default.ShowHPSWidgetOnLoad)
+                Widgets.Instance.ShowHPSWidget();
         }
-        */
     }
 }

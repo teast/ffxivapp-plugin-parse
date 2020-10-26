@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -9,10 +8,10 @@
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-    <Deterministic>false</Deterministic>    
+    <Deterministic>false</Deterministic>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Models\"/>
     <Compile Update="**\*.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -21,24 +20,25 @@
     </AvaloniaResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\**" />
+    <EmbeddedResource Include="Defaults\**"/>
+    <EmbeddedResource Include="Resources\**"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.0-preview5" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview5" />
+    <PackageReference Include="Avalonia" Version="0.10.0-preview5"/>
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview5"/>
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.10.0-preview5"/>
     <PackageReference Include="Teast.Controls.GroupBox" Version="1.2.0-preview5"/>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.25" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="NLog" Version="4.7.5" />
-    <PackageReference Include="NLog.Config" Version="4.7.5" />
-    <PackageReference Include="NLog.Schema" Version="4.7.5" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.25"/>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
+    <PackageReference Include="NLog" Version="4.7.5"/>
+    <PackageReference Include="NLog.Config" Version="4.7.5"/>
+    <PackageReference Include="NLog.Schema" Version="4.7.5"/>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ffxivapp-common\FFXIVAPP.Common\FFXIVAPP.Common.csproj" />
-    <ProjectReference Include="..\..\ffxivapp-resourcefiles\FFXIVAPP.ResourceFiles\FFXIVAPP.ResourceFiles.csproj" />
-    <ProjectReference Include="..\..\ffxivapp-iplugininterface\FFXIVAPP.IPluginInterface\FFXIVAPP.IPluginInterface.csproj" />
-    <ProjectReference Include="..\..\sharlayan\Sharlayan\Sharlayan.csproj" />
+    <ProjectReference Include="..\..\ffxivapp-common\FFXIVAPP.Common\FFXIVAPP.Common.csproj"/>
+    <ProjectReference Include="..\..\ffxivapp-resourcefiles\FFXIVAPP.ResourceFiles\FFXIVAPP.ResourceFiles.csproj"/>
+    <ProjectReference Include="..\..\ffxivapp-iplugininterface\FFXIVAPP.IPluginInterface\FFXIVAPP.IPluginInterface.csproj"/>
+    <ProjectReference Include="..\..\sharlayan\Sharlayan\Sharlayan.csproj"/>
   </ItemGroup>
-
 </Project>

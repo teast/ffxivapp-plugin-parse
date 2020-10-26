@@ -10,18 +10,22 @@
 
 namespace FFXIVAPP.Plugin.Parse.Properties
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Text;
     using FFXIVAPP.Common.Utilities;
+    using Newtonsoft.Json;
     using NLog;
 
-    internal class Settings : INotifyPropertyChanged
+    internal class Settings: SettingsBase
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
+        private static DefaultValues _defaultValues;
         private static Settings _default;
-
-        public new event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         public static Settings Default
         {
@@ -34,16 +38,37 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         /// <summary>
         /// Contains defualt values
         /// </summary>
-        public Settings Properties => new DefaultValues();
+        [JsonIgnore]
+        public SettingsBase Properties  => _defaultValues ?? (_defaultValues = new DefaultValues());
 
-        public Settings()
+        public Settings(): base()
         {
-            StoreHistoryInterval = 10000;
+            this.Reset();
+            this.Reload();
+        }
+
+        private void Reset() => Reload(this.Properties);
+
+    }
+
+    internal class SettingsBase : INotifyPropertyChanged
+    {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        public new event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public SettingsBase()
+        {
+            WidgetOpacityList = new List<string>();
         }
 
         public void Save()
         {
-            Logging.Log(Logger, $"TODO: Settings.Save.");
+            if (!Directory.Exists(Common.Constants.PluginsSettingsPath))
+                Directory.CreateDirectory(Common.Constants.PluginsSettingsPath);
+
+            var file = Path.Combine(Common.Constants.PluginsSettingsPath, "FFXIVAPP.Plugin.Parse.json");
+            File.WriteAllText(file, JsonConvert.SerializeObject((SettingsBase)this), Encoding.UTF8);
         }
 
         public static void SetValue(string name, string value, System.Globalization.CultureInfo culture)
@@ -51,11 +76,61 @@ namespace FFXIVAPP.Plugin.Parse.Properties
             Logging.Log(Logger, $"TODO: Settings.SetValue called with \"{name}\", value: \"{value}\".");
         }
 
-        private class DefaultValues: Settings
+        protected void Reload()
+        {
+            var file = Path.Combine(Common.Constants.PluginsSettingsPath, "FFXIVAPP.Plugin.Parse.json");
+            if (!File.Exists(file))
+                return;
+
+            var content = File.ReadAllText(file);
+            var config = JsonConvert.DeserializeObject<SettingsBase>(content);
+            Reload(config);
+        }
+
+        protected void Reload(SettingsBase config)
+        {
+            if (config == null)
+                return;
+
+            var type = typeof(SettingsBase);
+            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (var property in properties)
+            {
+                // Hack to handle ObservableCollection...
+                if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(ObservableCollection<>))
+                {
+                    var dest = property.GetValue(this) as dynamic;
+                    var source = property.GetValue(config) as dynamic;
+                    dest.Clear();
+                    AddRange(dest, source);
+
+                    continue;
+                }
+
+                property.SetValue(this, property.GetValue(config));
+            }
+        }
+
+        private void AddRange<T>(ObservableCollection<T> dest, ObservableCollection<T> source)
+        {
+            foreach (var items in source.Distinct())
+                dest.Add(items);
+        }
+
+        protected class DefaultValues : SettingsBase
         {
             public DefaultValues()
             {
                 StoreHistoryInterval = 10000;
+                WidgetOpacityList.AddRange(new[] {
+                    "0.5",
+                    "0.6",
+                    "0.7",
+                    "0.8",
+                    "0.9",
+                    "1.0",
+                });
             }
         }
 
@@ -456,7 +531,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
             set => Set(ref _showColumnDamageTakenCritMod, value);
         }
 
-        public bool ShowColumnDamageTakenCritModAverage        
+        public bool ShowColumnDamageTakenCritModAverage
         {
             get => _showColumnDamageTakenCritModAverage;
             set => Set(ref _showColumnDamageTakenCritModAverage, value);
@@ -1013,31 +1088,31 @@ namespace FFXIVAPP.Plugin.Parse.Properties
             get => _showColumnPercentOfTotalOverallHealingOverTime;
             set => Set(ref _showColumnPercentOfTotalOverallHealingOverTime, value);
         }
-        
+
         public bool ShowColumnPercentOfRegularHealingOverTime
         {
             get => _showColumnPercentOfRegularHealingOverTime;
             set => Set(ref _showColumnPercentOfRegularHealingOverTime, value);
         }
-        
+
         public bool ShowColumnPercentOfCriticalHealingOverTime
         {
             get => _showColumnPercentOfCriticalHealingOverTime;
             set => Set(ref _showColumnPercentOfCriticalHealingOverTime, value);
         }
-        
+
         public bool ShowColumnTotalOverallHealingOverTime
         {
             get => _showColumnTotalOverallHealingOverTime;
             set => Set(ref _showColumnTotalOverallHealingOverTime, value);
         }
-        
+
         public bool ShowColumnRegularHealingOverTime
         {
             get => _showColumnRegularHealingOverTime;
             set => Set(ref _showColumnRegularHealingOverTime, value);
         }
-        
+
         public bool ShowColumnCriticalHealingOverTime
         {
             get => _showColumnCriticalHealingOverTime;
@@ -1049,10 +1124,24 @@ namespace FFXIVAPP.Plugin.Parse.Properties
             get => _parseAdvanced;
             set => Set(ref _parseAdvanced, value);
         }
-        
+
+        public List<string> WidgetOpacityList
+        {
+            get => _widgetOpacityList;
+            set => Set(ref _widgetOpacityList, value);
+        }
+
+        public string WidgetOpacity
+        {
+            get => _widgetOpacity;
+            set => Set(ref _widgetOpacity, value);
+        }
+
         #endregion
 
         #region fields
+        private List<string> _widgetOpacityList;
+        private string _widgetOpacity;
         private bool _parseAdvanced;
         private bool _showColumnPercentOfTotalOverallHealingOverTime;
         private bool _showColumnPercentOfRegularHealingOverTime;

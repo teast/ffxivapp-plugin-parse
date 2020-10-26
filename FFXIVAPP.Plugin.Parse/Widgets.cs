@@ -10,7 +10,8 @@
 
 namespace FFXIVAPP.Plugin.Parse {
     using System;
-
+    using Avalonia;
+    using Avalonia.Controls.ApplicationLifetimes;
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
     using FFXIVAPP.Plugin.Parse.Windows;
@@ -54,7 +55,8 @@ namespace FFXIVAPP.Plugin.Parse {
 
         public void ShowDPSWidget() {
             try {
-                this.DPSWidget.Show();
+                var mainWindow = (Avalonia.Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+                this.DPSWidget.Show(mainWindow);
             }
             catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));
@@ -63,7 +65,8 @@ namespace FFXIVAPP.Plugin.Parse {
 
         public void ShowDTPSWidget() {
             try {
-                this.DTPSWidget.Show();
+                var mainWindow = (Avalonia.Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+                this.DTPSWidget.Show(mainWindow);
             }
             catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));
@@ -72,7 +75,8 @@ namespace FFXIVAPP.Plugin.Parse {
 
         public void ShowHPSWidget() {
             try {
-                this.HPSWidget.Show();
+                var mainWindow = (Avalonia.Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+                this.HPSWidget.Show(mainWindow);
             }
             catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));
